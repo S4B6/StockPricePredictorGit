@@ -169,3 +169,6 @@ logs/
 
 # Ignore other environment or OS-specific files
 .vscode/
+
+# Ignore used terminal commands
+used terminal commands.txt
