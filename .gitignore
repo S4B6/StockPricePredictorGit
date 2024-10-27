@@ -171,4 +171,4 @@ logs/
 .vscode/
 
 # Ignore used terminal commands
-used terminal commands.txt
+# used terminal commands.txt
