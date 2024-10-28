@@ -1,0 +1,85 @@
+/* Link to Google Fonts for Courier Prime */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+body {
+  background-color: #0d1b0f; /* Dark green background */
+  color: #ffffff;
+  font-family: 'Courier Prime', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 0;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  gap: 30px; /* Adjust gap for more space between items */
+  margin-top: 20px; /* Add space from the top */
+}
+
+.menu-item {
+  font-size: 1.2rem;
+  color: #888; /* Default dimmed color */
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: 400; /* Make font lighter */
+}
+
+/* Individual color styling for each menu item */
+.equities {
+  color: #a05aa2; /* Purple */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.markets {
+  color: #00ff00; /* Green */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.research {
+  color: #666666; /* Dimmed Gray */
+}
+
+.about {
+  color: #888888; /* Light Gray */
+}
+
+/* Predictor button with yellow outline */
+.predictor {
+  color: #ffcc00; /* Yellow text */
+  border: 1px solid #ffcc00;
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.predictor:hover {
+  background-color: #ffcc00;
+  color: #0d1b0f; /* Background color on hover */
+}
+
+/* Hover Effects */
+.menu-item:hover {
+  color: #ffffff;
+}
+
+/* Main content styling */
+main {
+  text-align: left;
+  margin-top: 30px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+p {
+  color: #888888;
+  font-size: 1rem;
+}

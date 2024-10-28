@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Stock Price Predictor{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="menu">
+        <span class="menu-item equities"><a href="{% url 'equities' %}">Equities</a></span>
+        <span class="menu-item markets"><a href="{% url 'markets' %}">Markets</a></span>
+        <span class="menu-item research"><a href="{% url 'research' %}">Research</a></span>
+        <span class="menu-item about"><a href="{% url 'about' %}">About Me</a></span>
+        <span class="menu-item predictor"><a href="{% url 'predictor' %}">Predictor</a></span>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

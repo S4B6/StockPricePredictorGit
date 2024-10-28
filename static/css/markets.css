@@ -1,0 +1,38 @@
+/* static/css/markets.css */
+
+/* Centered Container */
+.container {
+    max-width: 1200px; /* Set max width to prevent stretching */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    text-align: center; /* Center-align the text */
+}
+
+/* Flexbox Row */
+.row {
+    display: flex;
+    justify-content: center; /* Center items in the row */
+    gap: 20px; /* Space between the charts */
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+/* Flex Columns for the Charts */
+.col-md-6 {
+    flex: 1 1 45%; /* Take up 45% of the width, with space between */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Set a dynamic height for the chart containers */
+.chart-container {
+    width: 100%;
+    height: 400px;
+    min-height: 300px;  /* Ensures charts are visible at smaller sizes */
+}
+
+/* Optional: Adjust title size for smaller screens */
+@media (max-width: 768px) {
+    h3 { font-size: 1.2em; }
+    .chart-container { height: 300px; }
+}
