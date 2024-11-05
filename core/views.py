@@ -5,9 +5,6 @@ from django.shortcuts import render
 def equities(request):
     return render(request, 'equities.html')
 
-def research(request):
-    return render(request, 'research.html')
-
 def about(request):
     return render(request, 'about.html')
 

@@ -51,3 +51,10 @@ Navigation
 
 •	Change directory: cd "C:\Users\goatm\Desktop\Stock Price Predictor\StockPricePredictorGit"
 Moves to the StockPricePredictorGit folder.
+
+**************************************************************
+SQL Commands
+
+python manage.py migrate
+python manage.py makemigrations
+python manage.py fetch_data      

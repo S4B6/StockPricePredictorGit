@@ -1,8 +1,12 @@
+/******************************************************/
+/* Body */
+/******************************************************/
+
 /* Link to Google Fonts for Courier Prime */
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
 body {
-  background-color: #0d1b0f; /* Dark green background */
+  background-color: #171717;
   color: #ffffff;
   font-family: 'Courier Prime', monospace;
   display: flex;
@@ -10,63 +14,79 @@ body {
   align-items: center;
   height: 0;
   margin: 0;
+  transition: 0ms;
 }
+
+/******************************************************/
+/* Menu */
+/******************************************************/
 
 .menu {
   display: flex;
   gap: 30px; /* Adjust gap for more space between items */
   margin-top: 20px; /* Add space from the top */
+  font-size: 1.2rem;
 }
 
-.menu-item {
-  font-size: 1.2rem;
-  color: #888; /* Default dimmed color */
+.menu-item a {
   text-decoration: none;
   cursor: pointer;
-  transition: color 0.3s ease;
-  font-weight: 400; /* Make font lighter */
+  padding: 3px 3px;
 }
 
 /* Individual color styling for each menu item */
-.equities {
-  color: #a05aa2; /* Purple */
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.equities a {
+  color: #ff00f1; /* Purple */
+  opacity: 70%;
 }
 
-.markets {
+.markets a {
   color: #00ff00; /* Green */
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  opacity: 70%;
 }
 
-.research {
-  color: #666666; /* Dimmed Gray */
-}
-
-.about {
-  color: #888888; /* Light Gray */
+.about a {
+  color: #e8eaeb; /* White */
+  opacity: 70%;
 }
 
 /* Predictor button with yellow outline */
-.predictor {
-  color: #ffcc00; /* Yellow text */
-  border: 1px solid #ffcc00;
+.predictor a {
+  color: #fff800; /* Yellow text */
+  border: 1px solid #fff800;
   padding: 3px 8px;
   border-radius: 2px;
+  margin-left: 80px;
+  padding: 3px 8px;
+  opacity: 90%;
+}
+
+.menu-item a:hover {
   text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.predictor:hover {
-  background-color: #ffcc00;
-  color: #0d1b0f; /* Background color on hover */
+/* Hover effect for Predictor button */
+.predictor a:hover {
+  background-color: #fff800;  /* Yellow background on hover */
+  color: black;               /* Black text on hover */
+  text-decoration: none;      /* No underline on hover for Predictor */
 }
 
-/* Hover Effects */
-.menu-item:hover {
-  color: #ffffff;
+/* Active menu item (current page) */
+.menu-item.active a {
+  opacity: 100%;
 }
+
+/* Hover effect for Predictor button */
+.predictor.active a {
+  background-color: #fff800;  /* Yellow background on hover */
+  color: black;               /* Black text on hover */
+  text-decoration: none;      /* No underline on hover for Predictor */
+}
+
+/******************************************************/
+/* xxx */
+/******************************************************/
 
 /* Main content styling */
 main {

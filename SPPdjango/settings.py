@@ -77,11 +77,14 @@ WSGI_APPLICATION = 'SPPdjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'market_data',               # Name of your database
+        'USER': 'maroqi67_user',              # Username in your PostgreSQL setup
+        'PASSWORD': '9137',     # Replace with the actual password for maroqi67_user
+        'HOST': 'localhost',                  # Typically localhost if it’s on your machine
+        'PORT': '5432',                  # Default PostgreSQL port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
