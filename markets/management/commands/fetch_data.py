@@ -60,7 +60,7 @@ class Command(BaseCommand):
 
         missing_symbols = []
 
-                # Iterate over each asset class and symbol to fetch data and store it
+        # Iterate over each asset class and symbol to fetch data and store it
         for asset_class, assets in asset_classes.items():
             for asset_info in assets:
                 # Fetch data from yfinance

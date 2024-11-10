@@ -1,0 +1,70 @@
+asset_class,ticker,name,name_from_source,country,region,custom_region,sub_region,constituents_count,market_cap,source
+Equity index,^BVSP,Bovespa,,Brazil,South America,Latin America,,86,,yfinance
+Equity index,^MERV,S&P Merval,,Argentina,South America,Latin America,,22,,yfinance
+Equity index,,MSCI Colcap,,Colombia,South America,Latin America,,25,,
+ETF,ICOL,iShares MSCI Colombia ETF,,Colombia,South America,Latin America,,,,yfinance
+Equity index,,S&P CLX IPSA,,Chile,South America,Latin America,,28,,
+ETF,ECH,iShares MSCI Chile ETF,,Chile,South America,Latin America,,,,yfinance
+Equity index,^MXX,S&P/BMV IPC,,Mexico,North America,Latin America,,35,,yfinance
+Equity index,^GSPC,S&P 500,,US,North America,North America,,503,,yfinance
+Equity index,^GSPTSE,S&P/TSX,,Canada,North America,North America,,222,,yfinance
+Equity index,^AXJO,S&P/ASX 200,,Australia,Oceania,Australasia,,200,,yfinance
+Equity index,^NZ50,NZX 50,,New Zealand,Oceania,Australasia,,50,,yfinance
+Equity index,,Moroccan All Shares,,Morocco,Africa,Africa,Maghreb,,,
+Equity index,,EGX 70,,Egypt,Africa,Africa,Middle East,,,
+ETF,EGPT,VanEck Egypt Index ETF,,Egypt,Africa,Africa,Middle East,,,yfinance
+Equity index,,NSE 30,,Nigeria,Africa,Africa,,,,
+ETF,NGE,Global X MSCI Nigeria ETF,,Nigeria,Africa,Africa,,,,yfinance
+Equity index,,FTSE South Africa,,South Africa,Africa,Africa,,,,
+ETF,EZA,iShares MSCI South Africa ETF,,South Africa,Africa,Africa,,,,yfinance
+Equity index,,DZAIR Index,,Algeria,Africa,Africa,Maghreb,,,
+ETF,AFK,VanEck Africa Index ETF,,,Africa,Africa,,81,,yfinance
+Equity index,^BFX,Bel 20,,Belgium,Europe,Europe,Benelux,20,,yfinance
+Equity index,^ATX,ATX,,Austria,Europe,Europe,DACH,20,,yfinance
+Equity index,,PX,,Czech Republic,Europe,Europe,CEE,11,,
+ETF,CZX.F,Expat Czech PX UCITS ETF,,Czech Republic,Europe,Europe,CEE,,  ,yfinance
+Equity index,^OMXC20,OMX Copenhagen 20,,Denmark,Europe,Europe,Scandinavia,20,,yfinance
+Equity index,^OMXH25,OMX Helsinki 25,,Finland,Europe,Europe,Scandinavia,25,,yfinance
+Equity index,^FCHI,CAC 40,,France,Europe,Europe,,40,,yfinance
+Equity index,^GDAXI,DAX,,Germany,Europe,Europe,DACH,40,,yfinance
+Equity index,GD.AT,Athens Composite Index,,Greece,Europe,Europe,PIGS,61,,yfinance
+Equity index,^HTL,Hungarian Traded Index,,Hungary,Europe,Europe,CEE,9,,yfinance
+Equity index,^ISEQ,ISEQ All Share,,Ireland,Europe,Europe,British Isles,25,,yfinance
+Equity index,,FTSE IT Mid Cap,,Italy,Europe,Europe,PIGS,,,
+ETF,EWI,iShares MSCI Italy ETF,,Italy,Europe,Europe,PIGS,,,yfinance
+Equity index,,LuxX Price Index,,Luxembourg,Europe,Europe,Benelux,9,,
+Equity index,^AEX,AEX,,Netherlands,Europe,Europe,Benelux,25,,yfinance
+Equity index,OSEBX.OL,OSE Benchmark,,Norway,Europe,Europe,Scandinavia,66,,yfinance
+Equity index,^PTL,Polish Traded Index,,Poland,Europe,Europe,CEE,12,,yfinance
+Equity index,PSI20.LS,PSI,,Portugal,Europe,Europe,PIGS,16,,yfinance
+Equity index,,BET,,Romania,Europe,Europe,CEE,,,
+ETF,ROX.F,Expat Romania BET - BK UCITS ETF,,Romania,Europe,Europe,CEE,,,yfinance
+Equity index,^IBEX,IBEX 35,,Spain,Europe,Europe,PIGS,35,,yfinance
+Equity index,^OMX,OMX Stockholm 30 Index,,Sweden,Europe,Europe,Scandinavia,30,,yfinance
+Equity index,^SSMI,SMI,,Switzerland,Europe,Europe,DACH,20,,yfinance
+Equity index,^FTSE,FTSE 100,,United Kingdom,Europe,Europe,British Isles,99,,yfinance
+Equity index,IMOEX.ME,MOEX Russia Index,,Russia,Asia,Asia,,37,,yfinance
+Equity index,,DSE 30,,Bangladesh,Asia,Asia,South Asia,,,
+Equity index,000001.SS,Shanghai Composite Index,,China,Asia,Asia,Greater China,1400,,yfinance
+Equity index,^BSESN,S&P BSE SENSEX,,India,Asia,Asia,,30,,yfinance
+Equity index,^JKSE,IDX COMPOSITE,,Indonesia,Asia,Asia,ASEAN,935,,yfinance
+Equity index,^N225,Nikkei 225,,Japan,Asia,Asia,,225,,yfinance
+Equity index,^KLSE,FTSE Bursa Malaysia KLCI,,Malaysia,Asia,Asia,ASEAN,30,,yfinance
+Equity index,,Karachi 100,,Pakistan,Asia,Asia,South Asia,,,
+ETF,PAK,Global X MSCI Pakistan ETF,,Pakistan,Asia,Asia,South Asia,,,yfinance
+Equity index,PSEI.PS,PSEi INDEX,,Philippines,Asia,Asia,ASEAN,30,,yfinance
+Equity index,,HNX 30,,Vietnam,Asia,Asia,ASEAN,,,yfinance
+ETF,VNM,VanEck Vietnam ETF,,Vietnam,Asia,Asia,ASEAN,,,yfinance
+Equity index,^STI,FTSE Straits Times Singapore,,Singapore,Asia,Asia,ASEAN,30,,yfinance
+Equity index,^KS11,KOSPI Composite Index,,South Korea,Asia,Asia,,839,,yfinance
+Equity index,^TWII,TSEC weighted index,,Taiwan,Asia,Asia,Greater China,806,,yfinance
+Equity index,^HSI,Hang Seng,,Hong Kong,Asia,Asia,Greater China,82,,yfinance
+Equity index,^SET.BK,SET,,Thailand,Asia,Asia,ASEAN,628,,yfinance
+Equity index,XU100.IS,BIST 100,,Turkey,Asie,Middle East,Middle East,100,,yfinance
+Equity index,,DFM General,,United Arab Emirates,Asie,Middle East,Middle East,40,,
+ETF,UAE,iShares MSCI UAE ETF,,United Arab Emirates,Asie,Middle East,Middle East,,,yfinance
+Equity index,^TASI.SR,Tadawul All Shares Index,,Saudi Arabia,Asie,Middle East,Middle East,242,,yfinance
+Equity index,,QE General,,Qatar,Asie,Middle East,Middle East,,,
+ETF,QAT,iShares MSCI Qatar ETF,,Qatar,Asie,Middle East,Middle East,,,yfinance
+Equity index,TA35.TA,TA 35,,Israel,Asie,Middle East,Middle East,35,,yfinance
+Equity index,,,,Iran,Asie,Middle East,Middle East,,,

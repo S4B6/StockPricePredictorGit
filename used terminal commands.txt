@@ -53,8 +53,14 @@ Navigation
 Moves to the StockPricePredictorGit folder.
 
 **************************************************************
-SQL Commands
+SQL Commands in terminal
 
 python manage.py migrate
 python manage.py makemigrations
-python manage.py fetch_data      
+python manage.py fetch_data
+
+
+**************************************************************
+SQL Commands in pgadmin
+
+DELETE FROM django_migrations WHERE app = 'markets';
