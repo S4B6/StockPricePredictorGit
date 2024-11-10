@@ -1,0 +1,12 @@
+STEPS:
+I. MARKETS PART
+	1. Find Commodities ticker + sectors (ia)
+	2. Find other asset classes (if it exists)
+	3. Create one database for each asset class
+	4. Populate each database using python + check if we found something or empty
+	5. List all what needs to be fetched to have the most updated data
+	6. Implement the first map chart
+	7. Implement other charts, tables, orignal ones
+
+II. APPLICATION
+	1. Apply for Rothschild, Allianz, etc.
