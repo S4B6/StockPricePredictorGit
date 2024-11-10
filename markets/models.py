@@ -5,11 +5,10 @@ class Asset(models.Model):
     symbol = models.CharField(max_length=10, unique=True)  # e.g., "^GSPC"
     name = models.CharField(max_length=100)  # e.g., "S&P 500"
     asset_class = models.CharField(max_length=50)  # e.g., "Equity Index"
-    currency = models.CharField(max_length=3, null=True, blank=True, default="unkown")  # Optional
-    market_cap_coverage = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)  # New field as a percentage
-
+    
     # Optional fields specific to equity indices
     country = models.CharField(max_length=100, null=True, blank=True, default="unkown")
+    custom_region = models.CharField(max_length=50)
     constituents_count = models.PositiveIntegerField(null=True, blank=True)
     market_cap = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
     def __str__(self):
