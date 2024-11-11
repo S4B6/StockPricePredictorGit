@@ -1,0 +1,47 @@
+asset_class,ticker,name,commodity_category,commodity_subtype,source
+Commodity,BZ=F,Brent Crude,Energy,Crude Oil,yfinance
+Commodity,CL=F,WTI Crude,Energy,Crude Oil,yfinance
+Commodity,,Dubai Crude,Energy,Crude Oil,
+Commodity,RB=F,Gasoline,Energy,Refined Product,yfinance
+Commodity,,Jet Fuel,Energy,Refined Product,
+Commodity,,Diesel,Energy,Refined Product,
+Commodity,HO=F,Heating Oil,Energy,Refined Product,yfinance
+Commodity,NG=F,Natural Gas,Energy,,yfinance
+Commodity,,Coal,Energy,,
+Commodity,,Uranium,Energy,,
+Commodity,KE=F,Wheat,Agricultural,Grain,yfinance
+Commodity,ZC=F,Corn,Agricultural,Grain,yfinance
+Commodity,,Barley,Agricultural,Grain,
+Commodity,,Sorghum,Agricultural,Grain,
+Commodity,ZO=F,Oats,Agricultural,Grain,yfinance
+Commodity,ZR=F,Rough Rice,Agricultural,Grain,yfinance
+Commodity,ZL=F,Soybeans,Agricultural,Oilseeds,yfinance
+Commodity,,Rapeseed,Agricultural,Oilseeds,
+Commodity,,Sunflower Seeds,Agricultural,Oilseeds,
+Commodity,,Palm Oil,Agricultural,Oilseeds,
+Commodity,,Lentils,Agricultural,Pulses,
+Commodity,,Chickpeas,Agricultural,Pulses,
+Commodity,,Peas,Agricultural,Pulses,
+Commodity,,Beans,Agricultural,Pulses,
+Commodity,,Lumber,Agricultural,Forestry,
+Commodity,LE=F,Live Cattle,Livestock,Cattle,yfinance
+Commodity,,Feeder Cattle,Livestock,Cattle,
+Commodity,HE=F,Lean Hogs,Livestock,Hogs,yfinance
+Commodity,,Pork Bellies,Livestock,Hogs,
+Commodity,GC=F,Gold,Metals,Precious Metals,yfinance
+Commodity,SI=F,Silver,Metals,Precious Metals,yfinance
+Commodity,PL=F,Platinum,Metals,Precious Metals,yfinance
+Commodity,PA=F,Palladium,Metals,Precious Metals,yfinance
+Commodity,HG=F,Copper,Metals,Base Metals,yfinance
+Commodity,,Aluminium,Metals,Base Metals,
+Commodity,,Nickel,Metals,Base Metals,
+Commodity,,Iron Ore,Metals,Other Industrial Metals,
+Commodity,,Steel,Metals,Other Industrial Metals,
+Commodity,KC=F,Coffee,Tropical Commodities,Beverage,yfinance
+Commodity,CC=F,Cocoa,Tropical Commodities,Beverage,yfinance
+Commodity,,Tea,Tropical Commodities,Beverage,
+Commodity,CT=F,Cotton,Tropical Commodities,Fiber,yfinance
+Commodity,,Wool,Tropical Commodities,Fiber,
+Commodity,SB=F,Sugar,Tropical Commodities,,yfinance
+Commodity,,Rubber,Tropical Commodities,,
+Commodity,OJ=F,Orange Juice,Tropical Commodities,,yfinance

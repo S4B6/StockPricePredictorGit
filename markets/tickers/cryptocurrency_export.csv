@@ -1,0 +1,8 @@
+asset_class,ticker,name,token_category,source
+Cryptocurrency,BTC-USD,Bitcoin,Payment,yfinance
+Cryptocurrency,ETH-USD,Ethereum,Platform,yfinance
+Cryptocurrency,USDT-USD,Tether,Stablecoin,yfinance
+Cryptocurrency,SOL-USD,Solana,Platform,yfinance
+Cryptocurrency,BNB-USD,BNB,Exchange,yfinance
+Cryptocurrency,DOGE-USD,Dogecoin,Memecoin,yfinance
+Cryptocurrency ETF,BITW,Bitwise 10 Crypto Index Fund,,yfinance

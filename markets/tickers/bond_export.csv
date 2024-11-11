@@ -1,0 +1,22 @@
+asset_class,ticker,name,country,region,custom_region,economic_power_region,issuer_type,maturity,credit_quality,source
+Bond,^IRX,US 13-Week T-Bill,US,North America,North America,G5,Sovereign,0.25,,yfinance
+Bond,,US 1-Year T-Bill,US,North America,North America,G5,Sovereign,1,,yfinance
+Bond,,US 2-Year T-Note,US,North America,North America,G5,Sovereign,2,,yfinance
+Bond,^FVX,US 5-Year T-Note,US,North America,North America,G5,Sovereign,5,,yfinance
+Bond,^TNX,US 10-Year T-Note,US,North America,North America,G5,Sovereign,10,,yfinance
+Bond,^TYX,US 30-Year T-Bond,US,North America,North America,G5,Sovereign,30,,yfinance
+Bond,,Bund,Germany,Europe,Europe,G5,Sovereign,,,
+Bond,,JGB,Japan,Asia,Asia,G5,Sovereign,,,
+Bond,,Gilt,United Kingdom,Europe,Europe,G5,Sovereign,,,
+Bond,,OAT,France,Europe,Europe,G5,Sovereign,,,
+Bond,,BTP,Italy,Europe,Europe,G20,Sovereign,,,
+Bond,,GoCBond,Canada,North America,North America,G20,Sovereign,,,
+Bond,,CGB,China,Asia,Asia,G20,Sovereign,,,
+Bond,,KTB,South Korea,Asia,Asia,G20,Sovereign,,,
+Bond,,AGB,Australia,Oceania,Australasia,G20,Sovereign,,,
+Bond ETF,IGLO.L,iShares Global Government Bond UCITS ETF USD,,,,G7,Sovereign,,,yfinance
+Bond ETF,EMB,iShares J.P. Morgan USD Emerging Markets Bond ETF,,,,Emerging,Sovereign,,,yfinance
+Bond ETF,CORP.L,iShares Global Corp Bond UCITS ETF USD,,Global,Global,Global,Corporate,,IG,yfinance
+Bond ETF,HYLD.L,iShares Global High Yield Corp Bond UCITS ETF,,Global,Global,Global,Corporate,,HY,yfinance
+Bond ETF,GHYG,iShares US & Intl High Yield Corp Bond ETF,US,North America,North America,G5,Corporate,,HY,yfinance
+Bond ETF,USIG,iShares Broad USD Investment Grade Corporate Bond ETF,US,North America,North America,G5,Corporate,,IG,yfinance
