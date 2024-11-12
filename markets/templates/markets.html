@@ -1,31 +1,99 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block body_class %}page-markets{% endblock %}
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/markets.css' %}">
 
-    <div class="container">
-        <h1>Stock Markets at a Glance</h1>
+    <div class="page-introduction"></div>
 
-        <div class="row">
-            <!-- North America Chart -->
-            <div class="col-md-6">
-                <h3>North America (S&P 500)</h3>
-                <div id="north-america-chart" class="chart-container"
-                     data-chart-data='{{ north_america_data}}'></div>
-            </div>
+    <!-- Link to your external JavaScript file -->
+    <script src="{% static 'js/typing_effect.js' %}"></script>
 
-            <!-- Eastern Europe Chart -->
-            <div class="col-md-6">
-                <h3>Eastern Europe (Nikkei 225)</h3>
-                <div id="eastern-europe-chart" class="chart-container"
-                     data-chart-data='{{ eastern_europe_data}}'></div>
-            </div>
+    <div id="sticky-nav">
+        <span id="hierarchy-text"></span> <!-- This span will display the hierarchy text -->
+        <span class="menu-arrow">&#9662;</span> <!-- Arrow symbol (▼) -->
+        <div class="dropdown-menu" id="dropdown-menu">
         </div>
     </div>
 
-    <!-- Include Plotly and external JavaScript file -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="{% static 'js/markets.js' %}"></script>
+    <!-- Main Content Structure with clear section hierarchy -->
+    <section id="equities" class="main-section">
+    <h1 class="section-title">Equities</h1>
+
+        <div id="all-countries" class="sub-section">
+            <h2 class="sub-section-title">All Countries</h2>
+            <div class="filler"></div>
+            <h3> </h3>
+        </div>
+        
+        <div id="world-developed-emerging-markets" class="sub-section">
+            <h2 class="sub-section-title">World vs. Developed vs. Emerging Markets</h2>
+            <div class="filler"></div>
+        </div>
+        
+        <div id="all-sectors" class="sub-section">
+            <h2 class="sub-section-title">All Sectors</h2>
+            <div class="filler"></div>
+        </div>
+
+        <div id="america" class="sub-section">
+            <h2 class="sub-section-title">America</h2>
+            <div id="north-america">
+                <h3>North America</h3>
+                <div class="filler"></div>
+            </div>
+            <div id="south-america">
+                <h3>South America</h3>
+            </div>
+        </div>
+
+        <div id="europe" class="sub-section">
+            <h2 class="sub-section-title">Europe</h2>
+            <div id="western-europe">
+                <h3>Western Europe</h3>
+                <div class="filler"></div>
+            </div>
+            <div id="northern-europe">
+                <h3>Northern Europe</h3>
+            </div>
+            <div id="southern-europe">
+                <h3>Southern Europe</h3>
+            </div>
+            <div id="cee-europe">
+                <h3>CEE Europe</h3>
+            </div>
+            <!-- More subsections here -->
+        </div>
+</section>
+
+<section id="bonds" class="main-section">
+    <h1 class="section-title">Bonds</h1>
+    <!-- Bonds content goes here -->
+    <div class="filler"></div>
+</section>
+
+<section id="forex" class="main-section">
+    <h1 class="section-title">Forex</h1>
+    <!-- Forex content goes here -->
+     <div class="filler"></div>
+</section>
+
+<section id="commodities" class="main-section">
+    <h1 class="section-title">Commodities</h1>
+    <!-- Commodities content goes here -->
+     <div class="filler"></div>
+</section>
+
+<section id="cryptocurrencies" class="main-section">
+    <h1 class="section-title">Cryptocurrencies</h1>
+    <!-- Cryptocurrencies content goes here -->
+     <div class="filler"></div>
+</section>
+
+
+
+    <!-- Link to external JavaScript file -->
+    <script src="{% static 'js/markets_sticky_ribbon.js' %}"></script>
 {% endblock %}

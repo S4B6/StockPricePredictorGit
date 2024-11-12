@@ -8,23 +8,39 @@
     <title>{% block title %}Stock Price Predictor{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <nav class="menu">
-        <span class="menu-item equities {% if request.resolver_match.url_name == 'equities' %}active{% endif %}">
-            <a href="{% url 'equities' %}">Equities</a>
-        </span>
-        <span class="menu-item markets {% if request.resolver_match.url_name == 'markets' %}active{% endif %}">
-            <a href="{% url 'markets' %}">Markets</a>
-        </span>
-        <span class="menu-item about {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-            <a href="{% url 'about' %}">About</a>
-        </span>
-        <span class="menu-item predictor {% if request.resolver_match.url_name == 'predictor' %}active{% endif %}">
-            <a href="{% url 'predictor' %}">Predictor</a>
-        </span>
-    </nav>
-    <main>
+
+<body class="{% block body_class %}{% endblock %}">
+    <header class="header">
+        <nav class="menu">
+            <span class="menu-item equities {% if request.resolver_match.url_name == 'equities' %}active{% endif %}">
+                <a href="{% url 'equities' %}">Equities</a>
+            </span>
+            <span class="menu-item markets {% if request.resolver_match.url_name == 'markets' %}active{% endif %}">
+                <a href="{% url 'markets' %}">Markets</a>
+            </span>
+            <span class="menu-item about {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                <a href="{% url 'about' %}">About</a>
+            </span>
+            <span class="menu-item predictor {% if request.resolver_match.url_name == 'predictor' %}active{% endif %}">
+                <a href="{% url 'predictor' %}">Predictor</a>
+            </span>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
         {% block content %}{% endblock %}
     </main>
+
+
+    <footer class="footer">
+        <p>Footer Content</p>
+    </footer>
+
+    <!-- Always go the top of the page when refreshed-->
+    <script>
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+    </script>
 </body>
 </html>

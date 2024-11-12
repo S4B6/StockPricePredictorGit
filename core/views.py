@@ -10,3 +10,4 @@ def about(request):
 
 def predictor(request):
     return render(request, 'predictor.html')
+

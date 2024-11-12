@@ -1,0 +1,19 @@
+Hi,
+
+Im a am developing my website using django.
+
+I would like, within the the space bordered in blue, corresponding to the div id = all-countries:
+
+<div id="all-countries" class="sub-section">
+            <h2 class="sub-section-title">All Countries</h2>
+            <div class="filler"></div>
+
+        </div>
+To display 2 things:
+
+On left side (taking 70% of the width), an interactive world map highly cutomizable,
+showing each country in a different color depending on data that i have in postgresql database. I also want when I hover to display data stored in database.
+
+On right side, I would like I would like to display a small chart.
+
+But maybe lets first work on the left side. Please I need your help

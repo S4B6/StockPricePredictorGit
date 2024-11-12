@@ -1,13 +1,28 @@
 /******************************************************/
-/* Body */
+/* Structure Identifier */
+/******************************************************/
+
+/*
+body, main, footer, header, div{
+  border: 1px solid rgba(0, 0, 255, 0.5);
+}
+
+*/
+
+/******************************************************/
+/* Body, Html */
 /******************************************************/
 
 /* Link to Google Fonts for Courier Prime */
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
+body, html, .header {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #171717;
-  color: #ffffff;
+  color: white;
   font-family: 'Courier Prime', monospace;
   display: flex;
   flex-direction: column;
@@ -17,37 +32,63 @@ body {
   transition: 0ms;
 }
 
+.page-equities {
+  background: linear-gradient(180deg, black, rgb(17, 0, 24), black);
+  min-height: 100vh;
+}
+.page-markets {
+  background: linear-gradient(180deg, black, rgb(7, 17, 0), black);
+  min-height: 100vh;
+}
+
+.page-about {
+  background: linear-gradient(180deg, black, rgb(20, 20, 20), black);
+  min-height: 100vh;
+}
+
+.page-predictor {
+  background: linear-gradient(135deg, black, rgb(24, 13, 0), black);
+  min-height: 100vh;
+}
+
+
+
 /******************************************************/
 /* Menu */
 /******************************************************/
 
 .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* Center the menu */
+  width: 100%; /* Limit the width of the menu */
+  z-index: 1000;
+  gap: 30px;
+  font-size: 1.5rem;
+  background-color: black;
+  justify-content: center;
+  padding: 20px 0;
   display: flex;
-  gap: 30px; /* Adjust gap for more space between items */
-  margin-top: 20px; /* Add space from the top */
-  font-size: 1.2rem;
 }
 
 .menu-item a {
   text-decoration: none;
-  cursor: pointer;
   padding: 3px 3px;
 }
 
 /* Individual color styling for each menu item */
 .equities a {
   color: #ff00f1; /* Purple */
-  opacity: 70%;
 }
 
 .markets a {
   color: #00ff00; /* Green */
-  opacity: 70%;
 }
 
 .about a {
   color: #e8eaeb; /* White */
-  opacity: 70%;
 }
 
 /* Predictor button with yellow outline */
@@ -58,11 +99,11 @@ body {
   border-radius: 2px;
   margin-left: 80px;
   padding: 3px 8px;
-  opacity: 90%;
 }
 
 .menu-item a:hover {
   text-decoration: none;
+  background-color: #131313;
 }
 
 /* Hover effect for Predictor button */
@@ -72,10 +113,36 @@ body {
   text-decoration: none;      /* No underline on hover for Predictor */
 }
 
-/* Active menu item (current page) */
-.menu-item.active a {
-  opacity: 100%;
+.equities.active a,
+.markets.active a,
+.about.active a {
+    position: relative;
 }
+
+.equities.active a::after,
+.markets.active a::after,
+.about.active a::after {
+    content: "";
+    position: absolute;
+    bottom: 0; /* Aligns with the bottom of the text */
+    left: 10%; /* Start a bit in from the left */
+    width: 80%; /* Cover only 80% of the text width */
+    height: 2px; /* Thickness of the underline */
+    background-color: currentColor; /* Inherits the color of the text */
+}
+
+.equities.active a::after {
+    background-color: #ff00f1; /* Color for equities */
+}
+
+.markets.active a::after {
+    background-color: #00ff00; /* Color for markets */
+}
+
+.about.active a::after {
+    background-color: #e8eaeb; /* Color for about */
+}
+
 
 /* Hover effect for Predictor button */
 .predictor.active a {
@@ -84,22 +151,12 @@ body {
   text-decoration: none;      /* No underline on hover for Predictor */
 }
 
+
 /******************************************************/
-/* xxx */
+/* Content Wraper */
 /******************************************************/
 
-/* Main content styling */
-main {
-  text-align: left;
-  margin-top: 30px;
+.content-wrapper {
+  padding-top: 200px;
 }
 
-h1 {
-  font-size: 1.5rem;
-  color: #ffffff;
-}
-
-p {
-  color: #888888;
-  font-size: 1rem;
-}
