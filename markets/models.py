@@ -4,6 +4,7 @@
 # LIBRARIES
 
 from django.db import models
+from django.utils import timezone
 
 #################################
 # TICKERS AND OTHER RELEVANT DATA
@@ -94,6 +95,60 @@ class DailyPrice(models.Model):
     low = models.DecimalField(max_digits=12, decimal_places=4, null=True, blank=True)
     adj_close = models.DecimalField(max_digits=12, decimal_places=4, null=True, blank=True)
     volume = models.BigIntegerField(null=True, blank=True)
+    fetch_date = models.DateTimeField(default=timezone.now)  # Set to current timestamp on creation
+
+#################################
+# OUTPUTS
+
+########### EQUITIES
+
+# All Countries - Stock Performace
+class AllCountriesStockPerformance(models.Model):
+    country_code = models.CharField(max_length=3, blank=True, null=True)
+    country_name = models.CharField(max_length=100, blank=True, null=True)
+    custom_region_name = models.CharField(max_length=100, null=True, blank=True)
+
+    # Other info
+    asset_class = models.CharField(max_length=50)
+    ticker = models.CharField(max_length=20)
+    security_name = models.CharField(max_length=100)
+    
+    # Stock performance over different timeframes
+    d_performance = models.FloatField(null=True, blank=True)
+    w_performance = models.FloatField(null=True, blank=True)
+    m_performance = models.FloatField(null=True, blank=True) 
+    y_performance = models.FloatField(null=True, blank=True)
+    decade_performance = models.FloatField(null=True, blank=True)
+
+    # Index price (current or reference price)
+    index_most_recent_price = models.FloatField(null=True, blank=True)
+
+    # Track when this data was fetched from yfinance
+    fetch_date = models.DateTimeField(default=timezone.now)  # Set to current timestamp on creation
+
+# All Regions - Stock Performance
+class AllRegionsStockPerformance(models.Model):
+
+    region_name = models.CharField(max_length=100, null=True, blank=True)
+    custom_region_name = models.CharField(max_length=100, null=True, blank=True)
+    
+    # Other info
+    asset_class = models.CharField(max_length=50)
+    ticker = models.CharField(max_length=20)
+    security_name = models.CharField(max_length=100)
+    
+    # Stock performance over different timeframes
+    d_performance = models.FloatField(null=True, blank=True)
+    w_performance = models.FloatField(null=True, blank=True)
+    m_performance = models.FloatField(null=True, blank=True) 
+    y_performance = models.FloatField(null=True, blank=True)
+    decade_performance = models.FloatField(null=True, blank=True)
+
+    # Index price (current or reference price)
+    index_most_recent_price = models.FloatField(null=True, blank=True)
+
+    # Track when this data was fetched from yfinance
+    fetch_date = models.DateTimeField(default=timezone.now)  # Set to current timestamp on creation
 
 #################################
 # OTHER DATA

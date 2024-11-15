@@ -24,13 +24,26 @@
 
         <div id="all-countries" class="sub-section">
             <h2 class="sub-section-title">All Countries</h2>
-            <div class="filler"></div>
-            <h3> </h3>
-        </div>
-        
-        <div id="world-developed-emerging-markets" class="sub-section">
-            <h2 class="sub-section-title">World vs. Developed vs. Emerging Markets</h2>
-            <div class="filler"></div>
+            <div id="content-wrapper">
+
+                <div id="map-wrapper">
+                    <div id="map-container"></div> <!-- Div for the map -->
+                    <div id="tooltip"></div> <!-- Tooltip for hover information -->
+                    <div id="legend-container"></div> <!-- Legend for performance colors -->
+                </div>
+
+                <div id="all-countries-performance-wrapper">
+                    <div class="centered-title">Top Gainers/Losers<br><br><span class="subtitle">By Countries & Regions</span></div>
+                    <div id="content-wrapper">
+                        <div id="performance-chart1"></div>
+                        <div id="performance-chart2"></div>
+                    </div>
+                </div>
+                
+                <!-- Tooltip for the bars -->
+                <div id="bar-tooltip"></div>
+            
+            </div>
         </div>
         
         <div id="all-sectors" class="sub-section">
@@ -92,8 +105,8 @@
      <div class="filler"></div>
 </section>
 
-
-
     <!-- Link to external JavaScript file -->
     <script src="{% static 'js/markets_sticky_ribbon.js' %}"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- Load D3.js -->
+    <script src="{% static 'js/markets_map.js' %}"></script> <!-- Include your JavaScript file -->
 {% endblock %}

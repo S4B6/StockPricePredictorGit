@@ -1,14 +1,20 @@
 from django.shortcuts import render
-import yfinance as yf
 from django.http import JsonResponse
-from pytz import timezone
-from datetime import datetime
-from .utils import fetch_north_america_data, fetch_eastern_europe_data
+from .models import AllCountriesStockPerformance
+
 import json
 
 def markets(request):
-    context = {
-        "north_america_data": json.dumps(fetch_north_america_data()),  # Serialize to JSON
-        "eastern_europe_data": json.dumps(fetch_eastern_europe_data()),  # Serialize to JSON
-    }
-    return render(request, 'markets.html', context)
+    return render(request, 'markets.html')
+
+
+def countries_performance_data(request):
+    # Fetch the necessary fields for each country
+    data = AllCountriesStockPerformance.objects.values(
+        'country_code', 
+        'd_performance', 
+        'security_name', 
+        'index_most_recent_price', 
+        'fetch_date'
+    )
+    return JsonResponse(list(data), safe=False)

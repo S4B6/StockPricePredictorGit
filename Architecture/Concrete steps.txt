@@ -1,6 +1,17 @@
  STEPS:
 I. MARKETS PART
-	1. Different wallpaper for each page
+A// Populate each chart/map ...
+
+	1. Lets start with the map
+
+
+C//
+	1. When finish Markets, add a custom chart (mixing all indices)
+	2. Create the premiumization of the website
+	3. Make the customizable chart premium
 
 II. APPLICATION
 	1. Apply for Allianz, PhD etc.
+
+
+TEMP KEY NUKMBRE480235

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',  # Register the core app
-    'markets.apps.MarketsConfig',
+    'markets',
 ]
 
 MIDDLEWARE = [

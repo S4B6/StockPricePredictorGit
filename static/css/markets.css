@@ -14,7 +14,7 @@ h1 {
     display: inline-block;
     animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
     font-weight: normal;
-
+    margin-bottom: 60px;
   }
 
   .as-h1, h1 {
@@ -31,6 +31,7 @@ h1 {
 h2 {
     font-size: 1.6em;
     font-weight: normal;
+    margin-bottom: 30px;
 }
 
 h3 {
@@ -106,4 +107,191 @@ h3 {
 
 .dropdown-menu a.active-hierarchy {
     color: rgba(0, 255, 0); /* Highlight color for the current hierarchy */
+}
+
+
+/******************************************************/
+/* Equity */
+/******************************************************/
+
+/************* All Countries **************/
+
+#all-countries {
+
+}
+
+#content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.subtitle {
+    color: grey;
+}
+
+/* Map */
+
+#map-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 66%;
+
+}
+
+#map-container {
+    height: 500px;
+}
+
+#tooltip {
+    position: absolute;
+    visibility: hidden;
+    background-color: black;
+    padding: 5px;
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 3px;
+    font-size: 12px;
+    pointer-events: none;
+    color: white;
+}
+
+#legend-container {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    top:0;
+}
+
+
+/* Right side performance table */
+#all-countries-performance-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0px;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align the content */
+}
+
+.centered-title {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px; /* Space below the title */
+}
+
+#performance-chart1, #performance-chart2 {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 200px;
+    color: white;
+}
+
+.bar-container {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.bar-label {
+    font-size: 12px;
+}
+
+.bar {
+    height: 20px;
+    border-radius: 0; /* Removed rounding */
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 0 5px;
+}
+
+.positive-bar {
+    background-color: rgba(0, 255, 0, 0.8);
+    color: black;
+}
+
+.negative-bar {
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+}
+
+/* Right-align labels for chart 1 */
+#performance-chart1 .bar-container {
+    justify-content: flex-end;
+}
+
+#performance-chart1 .bar-label {
+    margin-left: 5px;
+    text-align: right;
+}
+
+/* Left-align labels for chart 2 */
+#performance-chart2 .bar-container {
+    justify-content: flex-start;
+}
+
+#performance-chart2 .bar-label {
+    margin-right: 5px;
+    text-align: left;
+}
+
+.bar-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Stack label above the bar */
+    gap: 2px;
+}
+
+.bar-label {
+    font-size: 12px;
+    text-align: center; /* Center align the label above the bar */
+}
+
+/* For Chart 1 */
+#performance-chart1 .bar-container {
+    align-items: flex-end; /* Align to the right for the first chart */
+}
+
+/* For Chart 2 */
+#performance-chart2 .bar-container {
+    align-items: flex-start; /* Align to the left for the second chart */
+}
+
+.chart-title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.chart-footer {
+    font-size: 16px;
+    margin-top: 10px;
+    color: rgb(170, 170, 170);
+}
+
+#bar-tooltip {
+    position: absolute; 
+    visibility: hidden; 
+    background: black; 
+    color: white; 
+    padding: 3px; 
+    border: 1px solid rgb(80, 80, 80); 
+    border-radius: 3px; 
+    font-size: 12px; 
+    z-index: 1000;
+}
+
+
+
+
+.percentage-label {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 4px;
 }
