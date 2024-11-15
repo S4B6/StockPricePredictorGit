@@ -131,6 +131,7 @@ class AllRegionsStockPerformance(models.Model):
 
     region_name = models.CharField(max_length=100, null=True, blank=True)
     custom_region_name = models.CharField(max_length=100, null=True, blank=True)
+    country_list = models.TextField(null=True, blank=True)  # To store country codes as a comma-separated string
     
     # Other info
     asset_class = models.CharField(max_length=50)

@@ -268,12 +268,6 @@ h3 {
     color: white;
 }
 
-.chart-footer {
-    font-size: 16px;
-    margin-top: 10px;
-    color: rgb(170, 170, 170);
-}
-
 #bar-tooltip {
     position: absolute; 
     visibility: hidden; 
@@ -286,12 +280,10 @@ h3 {
     z-index: 1000;
 }
 
-
-
-
 .percentage-label {
     display: block;
     font-size: 12px;
     text-align: center;
     margin-top: 4px;
 }
+

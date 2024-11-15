@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db.models import Avg, Max, Min
 from datetime import timedelta
-from markets.models import Equity_Tickers, AllRegionsStockPerformance, AllCountriesStockPerformance, DailyPrice
+from markets.models import Equity_Tickers, AllRegionsStockPerformance, AllCountriesStockPerformance, DailyPrice, CountryData
 
 class Command(BaseCommand):
     help = 'Populate the AllRegionsStockPerformance table with custom regions, individual ticker data, and calculated averages'
@@ -15,6 +15,7 @@ class Command(BaseCommand):
 
         # Stage 3: Populate missing fields for custom regions
         self.populate_region_performance()
+        self.populate_country_list()
 
         self.stdout.write("AllRegionsStockPerformance table successfully populated in three stages.")
 
@@ -99,6 +100,27 @@ class Command(BaseCommand):
             )
 
         self.stdout.write("AllRegionsStockPerformance table updated with calculated average performances for each custom region.")
+
+    def populate_country_list(self):
+        # Fetch all rows in AllRegionsStockPerformance where asset_class is "Equity Basket"
+        equity_baskets = AllRegionsStockPerformance.objects.filter(asset_class="Equity Basket")
+
+        for basket in equity_baskets:
+            # Fetch associated country names from Equity_Tickers for the given custom_region_name
+            country_names = Equity_Tickers.objects.filter(custom_region=basket.custom_region_name).values_list('country', flat=True).distinct()
+
+            # Find corresponding country codes from markets_countrydata
+            country_codes = CountryData.objects.filter(country_name__in=country_names).values_list('country_code', flat=True).distinct()
+
+            # Join the country codes into a comma-separated string
+            country_list = ', '.join(filter(None, country_codes))  # Filter out None values if any
+
+            # Update the country_list field for the current Equity Basket
+            basket.country_list = country_list
+            basket.save()
+
+        self.stdout.write("Country list populated for all Equity Basket rows in AllRegionsStockPerformance.")
+
 
     def calculate_performance(self, ticker, latest_price, days):
         if latest_price is None:
