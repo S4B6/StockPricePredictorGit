@@ -45,6 +45,7 @@ Deactivates the virtual environment.
 •	Save dependencies: pip freeze > requirements.txt
 Saves installed packages to requirements.txt for later use.
 
+•	Insttall requirements: pip install -r requirements.txt
 
 **************************************************************
 Navigation
