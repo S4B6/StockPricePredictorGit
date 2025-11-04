@@ -23,7 +23,19 @@
     <h1 class="section-title">Equities</h1>
 
         <div id="all-countries" class="sub-section">
-            <h2 class="sub-section-title">All Countries</h2>
+            <h2 class="sub-section-title">
+                All Countries,
+                <span id="performance-period" class="dropdown-trigger">1D</span>
+                Performance
+            </h2>
+            
+            <div id="period-selection" class="dropdown-content">
+                <a href="#" onclick="selectPeriod('1D')">1D</a>
+                <a href="#" onclick="selectPeriod('1W')">1W</a>
+                <a href="#" onclick="selectPeriod('1M')">1M</a>
+                <a href="#" onclick="selectPeriod('1Y')">1Y</a>
+                <a href="#" onclick="selectPeriod('10Y')">10Y</a>
+            </div>
             <div id="content-wrapper">
 
                 <div id="map-wrapper">

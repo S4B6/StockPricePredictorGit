@@ -1,0 +1,8 @@
+Hi, from this report,
+
+Can you retrieve for the group these data?
+
+- Sales (Units) for China, US, Asia, North America, Worldwide
+- Sales (Value) for China, US, Asia, North America, Worldwide
+- Deliveries (Units) for China, US, Asia, North America, Worldwide
+- Production (Units) for China, US, Asia, North America, Worldwide

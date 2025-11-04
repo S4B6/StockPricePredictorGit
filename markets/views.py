@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import AllCountriesStockPerformance, AllRegionsStockPerformance
+from .utils import get_main_countries_status
 
 import json
 
@@ -12,7 +13,11 @@ def countries_performance_data(request):
     # Fetch the necessary fields for each country
     data = AllCountriesStockPerformance.objects.values(
         'country_code', 
-        'd_performance', 
+        'd_performance',
+        'w_performance',
+        'm_performance',
+        'y_performance',
+        'decade_performance',
         'security_name', 
         'index_most_recent_price', 
         'fetch_date'
@@ -24,10 +29,17 @@ def regions_performance_data(request):
     data = AllRegionsStockPerformance.objects.values(
         'custom_region_name',
         'asset_class',
-        'd_performance', 
+        'd_performance',
+        'w_performance',
+        'm_performance',
+        'y_performance',
+        'decade_performance',
         'security_name',
         'country_list',
         'index_most_recent_price', 
         'fetch_date'
     )
     return JsonResponse(list(data), safe=False)
+
+def market_status_api(request):
+    return JsonResponse(get_main_countries_status(), safe=False)

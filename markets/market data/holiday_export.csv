@@ -1,0 +1,34 @@
+date,country,exchange,holiday_name
+11/3/2025, Japan,Tokyo Stock Exchange,Culture Day
+11/5/2025, India,India National Stock Exchange,Guru Nanak Jayanti
+11/11/2025, Canada,Canadian Securities Exchange,Armistice Day in World War I
+11/11/2025, Canada,Toronto Stock Exchange,Remembrance Day
+11/17/2025, Mexico,Mexico Stock Exchange,Revolution Day
+11/24/2025, Japan,Tokyo Stock Exchange,Labor Day
+12/12/2025, Mexico,Mexico Stock Exchange,Bank Holiday
+12/24/2025, Australia,Sydney Stock Exchange,Christmas - Early close at 14:00
+12/24/2025, France,Paris Stock Exchange,Christmas - Early close at 14:05
+12/24/2025, Germany,Frankfurt Stock Exchange,Christmas
+12/24/2025, United Kingdom,London Stock Exchange,Christmas - Early close at 12:30
+12/25/2025, Australia,Sydney Stock Exchange,Christmas
+12/25/2025, Canada,Canadian Securities Exchange,Christmas
+12/25/2025, Canada,Toronto Stock Exchange,Christmas
+12/25/2025, Canada,TSX Venture Exchange,Christmas
+12/25/2025, France,Paris Stock Exchange,Christmas
+12/25/2025, Germany,Frankfurt Stock Exchange,Christmas
+12/25/2025, Hong Kong,Hong Kong Stock Exchange,Christmas
+12/25/2025, India,India National Stock Exchange,Christmas
+12/25/2025, Mexico,Mexico Stock Exchange,Christmas
+12/25/2025, South Korea,Seoul Stock Exchange,Christmas
+12/25/2025, South Korea,KOSDAQ,Christmas
+12/25/2025, United Kingdom,London Stock Exchange,Christmas
+12/25/2025, United Kingdom,Aquis Exchange,Christmas
+12/26/2025, Australia,Sydney Stock Exchange,Boxing Day
+12/26/2025, Canada,Toronto Stock Exchange,Boxing Day
+12/26/2025, Canada,Canadian Securities Exchange,Boxing Day
+12/26/2025, Canada,TSX Venture Exchange,Boxing Day
+12/26/2025, France,Paris Stock Exchange,Boxing Day
+12/26/2025, Germany,Frankfurt Stock Exchange,Boxing Day
+12/26/2025, Hong Kong,Hong Kong Stock Exchange,The first weekday after Christmas Day
+12/26/2025, United Kingdom,London Stock Exchange,Boxing Day
+12/26/2025, United Kingdom,Aquis Exchange,Boxing Day

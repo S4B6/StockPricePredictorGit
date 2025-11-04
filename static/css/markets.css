@@ -287,3 +287,66 @@ h3 {
     margin-top: 4px;
 }
 
+
+
+
+
+
+
+
+
+/* Dropdown Trigger Styling */
+#performance-period {
+    cursor: pointer;
+    color: white;
+    background-color: #222; /* Grey background to indicate clickability */
+    padding: 4px 13px;
+
+    position: relative; /* Required to anchor the dropdown to the trigger */
+
+}
+
+#performance-period:hover {
+    background-color: #333;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #222;
+    min-width: 57px;
+    z-index: 1;
+    text-align: center;
+    left: 0;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    z-index: 1000;
+}
+
+/* Active trigger (lighter grey when dropdown is visible) */
+#performance-period.active {
+    background-color: #333; /* Lighter grey when active */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 8px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    text-align: left;
+    border-top: 1px solid #444;
+}
+
+
+.dropdown-content a:hover {
+    background-color: #333;
+}
+
+/* Show dropdown on trigger click */
+.show-dropdown {
+    display: block;
+}
+
+

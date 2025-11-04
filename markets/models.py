@@ -82,6 +82,22 @@ class Commodity_Tickers(models.Model):
     class Meta:
         unique_together = ('asset_class', 'name')
 
+### To monitor if top markets are open or closed ###
+
+# Exchanges
+class Exchange(models.Model):
+    country = models.CharField(max_length=100)
+    exchange_short_name = models.CharField(max_length=100)
+    timezone = models.CharField(max_length=50)  # e.g. "America/Mexico_City"
+    market_open_local = models.TimeField()
+    market_close_local = models.TimeField()
+
+# Holiday
+class Exchange_Holiday(models.Model):
+    date = models.DateField()
+    country = models.CharField(max_length=100)
+    holiday_name = models.CharField(max_length=100)
+
 #################################
 # DAILYPRICE DATA
 
@@ -96,6 +112,8 @@ class DailyPrice(models.Model):
     adj_close = models.DecimalField(max_digits=12, decimal_places=4, null=True, blank=True)
     volume = models.BigIntegerField(null=True, blank=True)
     fetch_date = models.DateTimeField(default=timezone.now)  # Set to current timestamp on creation
+    is_live = models.BooleanField(default=False)
+    time_utc = models.TimeField(null=True, blank=True)
 
 #################################
 # OUTPUTS

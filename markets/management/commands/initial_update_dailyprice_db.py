@@ -45,7 +45,7 @@ class Command(BaseCommand):
     def fetch_and_save_daily_price_data(self, ticker, name, asset_class):
         try:
             # Fetch historical data from yfinance (adjust period as needed, but data should ideally cover +10y)
-            data = yf.download(ticker, start="2000-01-01", progress=False)
+            data = yf.download(ticker, start="2010-01-01", progress=False, auto_adjust=False)
 
             # Check if data is empty, meaning no data was found for the ticker
             if data.empty:

@@ -148,7 +148,6 @@ class Command(BaseCommand):
                     # Attempt to fetch data from yfinance
                     ticker_data = yf.Ticker(instance.ticker)
                     info = ticker_data.info
-
                     # Get the name from source
                     name_from_source = info.get('longName') or info.get('shortName')
                     

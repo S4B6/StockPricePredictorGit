@@ -45,11 +45,23 @@ class Command(BaseCommand):
             start_date = (last_entry.date - timedelta(days=3)) if last_entry else "2000-01-01"
 
             # Fetch new data from start_date to today
-            data = yf.download(ticker, start=start_date, progress=False)
+            data = yf.download(ticker, start=start_date, progress=False, auto_adjust=False)
 
             # Check if data is empty, meaning no data was found for the ticker
             if data.empty:
                 return False  # No data found for this ticker
+
+            # Get real last market time in UTC using a tiny 1-minute fetch (ONCE per ticker)
+            #    Put this *before* the loop and reuse inside defaults
+            try:
+                t = yf.Ticker(ticker)
+                intraday = t.history(period="1d", interval="1m")
+                if not intraday.empty and getattr(intraday.index, "tz", None) is not None:
+                    last_time_utc = intraday.index[-1].tz_convert("UTC").time()
+                else:
+                    last_time_utc = None
+            except Exception:
+                last_time_utc = None
 
             # Capture the current timestamp once per batch
             fetch_timestamp = timezone.now()
@@ -72,7 +84,8 @@ class Command(BaseCommand):
                         'low': float(row.iloc[3]) if pd.notna(row.iloc[3]) else None,   # Low
                         'adj_close': float(row.iloc[0]) if pd.notna(row.iloc[0]) else None, # Adj Close
                         'volume': int(row.iloc[5]) if pd.notna(row.iloc[5]) else None, # Volume
-                        'fetch_date': fetch_timestamp  # Update with the current timestamp
+                        'fetch_date': fetch_timestamp,  # Update with the current timestamp
+                        'time_utc': last_time_utc
                     }
                 )
             return True  # Data was successfully found and processed    

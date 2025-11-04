@@ -5,6 +5,19 @@ A// Populate each chart/map ...
 	1. Lets start with the map
 
 
+
+
+
+B//
+
+	2. check dans le future si le compteur de duplicate dans la view function est efficace
+
+
+4. Jai beau automatiser la collecte de donne, le calcul des perf doit aussi etre effectue regfulierement
+
+
+Verifier precisement les formules de calcul des perf
+
 C//
 	1. When finish Markets, add a custom chart (mixing all indices)
 	2. Create the premiumization of the website
