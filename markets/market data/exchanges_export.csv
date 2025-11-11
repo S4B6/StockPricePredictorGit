@@ -1,17 +1,17 @@
-country,country_name_two,exchange,exchange_full_name,market_open_local,market_close_local,timezone,DST_used,utc_offset_indication,vlookup to check
-Mexico,,BMV,Bolsa Mexicana de Valores,8:30:00 AM,3:00:00 PM,America/Mexico_City,yes,-6,Mexico
-US,United States,NYSE,New York Stock Exchange,9:30:00 AM,4:00:00 PM,America/New_York,yes,-5,United States
-US,United States,NASDAQ,Nasdaq Stock Market,9:30:00 AM,4:00:00 PM,America/New_York,yes,-5,United States
-US,United States,CBOE,Cboe Global Markets,9:30:00 AM,4:00:00 PM,America/New_York,yes,-5,United States
-Canada,,TSX,Toronto Stock Exchange,9:30:00 AM,4:00:00 PM,America/Toronto,yes,-5,Canada
-Australia,,ASX,Australian Securities Exchange,10:00:00 AM,4:00:00 PM,Australia/Sydney,yes,11,Australia
-France,,Euronext Paris,Euronext Paris Stock Exchange,9:00:00 AM,5:30:00 PM,Europe/Paris,yes,1,France
-Germany,,Xetra,Frankfurt Stock Exchange (Frankfurter Wertpapierbörse),9:00:00 AM,5:30:00 PM,Europe/Berlin,yes,1,Germany
-United Kingdom,,LSE,London Stock Exchange,8:00:00 AM,4:30:00 PM,Europe/London,yes,0,United Kingdom
-China,,SSE,Shanghai Stock Exchange,9:30:00 AM,3:00:00 PM,Asia/Shanghai,no,8,#N/A
-China,,SZSE,Shenzhen Stock Exchange,9:30:00 AM,3:00:00 PM,Asia/Shanghai,no,8,#N/A
-India,,NSE,National Stock Exchange of India,9:15:00 AM,3:30:00 PM,Asia/Kolkata,no,6,India
-Japan,,TSE,Tokyo Stock Exchange,9:00:00 AM,3:00:00 PM,Asia/Tokyo,no,9,Japan
-South Korea,,KRX,Korea Exchange,9:00:00 AM,3:30:00 PM,Asia/Seoul,no,9,South Korea
-Hong Kong,,HKEX,Hong Kong Exchanges and Clearing Limited,9:30:00 AM,4:00:00 PM,Asia/Hong_Kong,no,8,Hong Kong
-Saudi Arabia,,Tadawul,Saudi Stock Exchange (Tadawul),10:00:00 AM,3:00:00 PM,Asia/Riyadh,no,3,#N/A
+country,exchange,exchange_full_name,market_open_local,market_close_local,timezone,DST_used,utc_offset_indication
+Mexico,BMV,Bolsa Mexicana de Valores,8:30:00 AM,3:00:00 PM,America/Mexico_City,yes,-6
+US,NYSE,New York Stock Exchange,9:30:00 AM,4:00:00 PM,America/New_York,yes,-5
+US,NASDAQ,Nasdaq Stock Market,9:30:00 AM,4:00:00 PM,America/New_York,yes,-5
+US,CBOE,Cboe Global Markets,9:30:00 AM,4:00:00 PM,America/New_York,yes,-5
+Canada,TSX,Toronto Stock Exchange,9:30:00 AM,4:00:00 PM,America/Toronto,yes,-5
+Australia,ASX,Australian Securities Exchange,10:00:00 AM,4:00:00 PM,Australia/Sydney,yes,11
+France,Euronext Paris,Euronext Paris Stock Exchange,9:00:00 AM,5:30:00 PM,Europe/Paris,yes,1
+Germany,Xetra,Frankfurt Stock Exchange (Frankfurter Wertpapierbörse),9:00:00 AM,5:30:00 PM,Europe/Berlin,yes,1
+United Kingdom,LSE,London Stock Exchange,8:00:00 AM,4:30:00 PM,Europe/London,yes,0
+China,SSE,Shanghai Stock Exchange,9:30:00 AM,3:00:00 PM,Asia/Shanghai,no,8
+China,SZSE,Shenzhen Stock Exchange,9:30:00 AM,3:00:00 PM,Asia/Shanghai,no,8
+India,NSE,National Stock Exchange of India,9:15:00 AM,3:30:00 PM,Asia/Kolkata,no,6
+Japan,TSE,Tokyo Stock Exchange,9:00:00 AM,3:00:00 PM,Asia/Tokyo,no,9
+South Korea,KRX,Korea Exchange,9:00:00 AM,3:30:00 PM,Asia/Seoul,no,9
+Hong Kong,HKEX,Hong Kong Exchanges and Clearing Limited,9:30:00 AM,4:00:00 PM,Asia/Hong_Kong,no,8
+Saudi Arabia,Tadawul,Saudi Stock Exchange (Tadawul),10:00:00 AM,3:00:00 PM,Asia/Riyadh,no,3

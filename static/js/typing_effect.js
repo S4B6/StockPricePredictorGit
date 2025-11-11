@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   // Split text into parts, with the styled part wrapped in a <span>
-  const text = `Track the latest recent price movements across major <span class="as-h1">asset classes</span>.`;
+  const text = `Real-time insight. One glance. All major asset classes.`;
   const textContainer = document.querySelector(".page-introduction");
 
   let index = 0;

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',  # Register the core app
     'markets',
+    "history",
 ]
 
 MIDDLEWARE = [
@@ -80,11 +81,21 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'market_data',  # Name of your database
         'USER': 'S4B6',  # Username in your PostgreSQL setup
-        'PASSWORD': '11sb99', # Replace with the actual password for maroqi67_user
+        'PASSWORD': 'Sami1234', 
         'HOST': 'localhost',  # Typically localhost if it’s on your machine
         'PORT': '5432', # Default PostgreSQL port
-    }
+    },
+
+    'warehouse': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'financial_data_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Sami1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

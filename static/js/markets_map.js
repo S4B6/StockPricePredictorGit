@@ -127,6 +127,43 @@ function updateMap(period) {
                             .attr("height", 500);
                 }
 
+                // --- Add SVG glow filter definitions once (for green/red light effects) ---
+const defs = svg.append("defs");
+
+// --- Define glow filters (expanded area to avoid square artifacts) ---
+const greenGlow = defs.append("filter")
+    .attr("id", "glow-green")
+    .attr("x", "-50%")
+    .attr("y", "-50%")
+    .attr("width", "200%")
+    .attr("height", "200%");
+greenGlow.append("feGaussianBlur")
+    .attr("stdDeviation", "1")
+    .attr("result", "blur");
+greenGlow.append("feMerge")
+    .selectAll("feMergeNode")
+    .data(["blur", "SourceGraphic"])
+    .enter()
+    .append("feMergeNode")
+    .attr("in", d => d);
+
+const redGlow = defs.append("filter")
+    .attr("id", "glow-red")
+    .attr("x", "-50%")
+    .attr("y", "-50%")
+    .attr("width", "200%")
+    .attr("height", "200%");
+redGlow.append("feGaussianBlur")
+    .attr("stdDeviation", "1")
+    .attr("result", "blur");
+redGlow.append("feMerge")
+    .selectAll("feMergeNode")
+    .data(["blur", "SourceGraphic"])
+    .enter()
+    .append("feMergeNode")
+    .attr("in", d => d);
+// -----
+
                 const projection = d3.geoMercator()
                                      .scale(130)
                                      .translate([750 / 2, 500 / 1.5]);
@@ -412,7 +449,6 @@ async function updateMarketStatusLights(svg, projection) {
             "US": [-98, 38],
             "Canada": [-106, 56],
             "Mexico": [-102, 23],
-            "Brazil": [-51, -10],
             "France": [2, 46],
             "Germany": [10, 51],
             "United Kingdom": [-1, 54],
@@ -425,29 +461,191 @@ async function updateMarketStatusLights(svg, projection) {
             "Australia": [134, -25]
         };
 
-        svg.selectAll(".market-light").remove();
+                const exchangeNamesOverride = {
+        "US": "NYSE, NASDAQ",
+        "China": "Shanghai, Shenzhen",
+        "India": "NSE, BSE",
+        "Japan": "Tokyo Stock Exchange",
+        "United Kingdom": "London Stock Exchange",
+        "France": "Euronext Paris",
+        "Germany": "Xetra (Frankfurt)",
+        "Canada": "Toronto Stock Exchange",
+        "Australia": "ASX",
+        "South Korea": "KOSPI",
+        "Hong Kong": "HKEX",
+        "Saudi Arabia": "Tadawul",
+        "Mexico": "Bolsa Mexicana de Valores"
+        };
+
+
+        // Clear previous lights
+        svg.selectAll(".market-lights-layer").remove();
+        const lightsLayer = svg.append("g")
+            .attr("class", "market-lights-layer")
+            .style("pointer-events", "all");
+
+        // Tooltip setup
+        let tooltip = d3.select("#market-tooltip");
+        if (tooltip.empty()) {
+            tooltip = d3.select("body")
+                .append("div")
+                .attr("id", "market-tooltip")
+                .attr("class", "tooltip-box"); // unified class
+        }
 
         Object.entries(countryCoords).forEach(([country, coords]) => {
             const data = marketStatus[country];
             if (!data) return;
 
             const [x, y] = projection(coords);
-            const color = data.is_open ? "#00FF00" : "#FF0000";
+            const color = data.is_open ? "#00ff00" : "#ff0000ff";
+            const hoverColor = data.is_open ? "#66ff99" : "#ff6666";
 
-            svg.append("circle")
-                .attr("class", "market-light")
+            // Base dot
+            const baseDot = lightsLayer.append("circle")
                 .attr("cx", x)
                 .attr("cy", y)
                 .attr("r", 5)
                 .attr("fill", color)
-                .attr("opacity", 0.9);
+                .attr("opacity", 0.95)
+                .style("cursor", "pointer");
+
+            // Pulse
+            const pulse = lightsLayer.append("circle")
+                .attr("cx", x)
+                .attr("cy", y)
+                .attr("r", 5)
+                .attr("fill", color)
+                .attr("opacity", 0.25)
+                .style("pointer-events", "none");
+
+            function animate() {
+                pulse.transition()
+                    .duration(1600)
+                    .ease(d3.easeSinInOut)
+                    .attr("r", 14)
+                    .attr("opacity", 0)
+                    .on("end", () => {
+                        pulse.attr("r", 5).attr("opacity", 0.25);
+                        animate();
+                    });
+            }
+            animate();
+
+            // Hover
+// === Hover logic ===
+baseDot
+    .on("mouseover", function (event) {
+
+        const exchangeLabel = exchangeNamesOverride[country] || data.exchange_name || country;
+
+        const dotSymbol = data.is_open
+            ? `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#00ff88,#006400);margin-right:4px;"></span>`
+            : `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#ff6666,#8b0000);margin-right:4px;"></span>`;
+
+        const statusLine = data.is_open
+            ? `${dotSymbol} Market is <strong>OPEN</strong>`
+            : `${dotSymbol} Market is <strong>CLOSED</strong>${data.reason.includes("Holiday") ? " – Holiday" : ""}`;
+
+        let timingLine = "";
+        if (data.is_open && data.close_in) {
+          timingLine = `Closes at ${data.market_close_local} local
+                        (<i>${data.close_in}</i>)`;
+      } else if (!data.is_open && data.open_in) {
+          timingLine = `<i>${data.open_in}</i>
+                        (Next open at ${data.market_open_local} local)`;
+      }
+
+        const info = `
+            <div>
+                <strong>${exchangeLabel}</strong><br>
+                ${statusLine}<br>
+                ${timingLine ? timingLine + "<br>" : ""}
+                Next holiday: <span style="color:#ff00f1;">${data.next_holiday}</span>
+            </div>
+        `;
+
+        tooltip.html(info)
+            .style("visibility", "visible")
+            .style("left", (event.pageX + 14) + "px")
+            .style("top", (event.pageY - 10) + "px");
+
+        d3.select(this)
+            .transition()
+            .duration(150)
+            .attr("r", 8);
+    })
+    .on("mousemove", function (event) {
+        tooltip
+            .style("left", (event.pageX + 14) + "px")
+            .style("top", (event.pageY - 10) + "px");
+    })
+    .on("mouseout", function () {
+        tooltip.style("visibility", "hidden");
+        d3.select(this)
+            .transition()
+            .duration(250)
+            .attr("r", 5);
+    });
         });
+
     } catch (error) {
         console.error("Error loading market status:", error);
     }
 }
 
+function createMarketStatusLegend() {
+    const container = d3.select("#market-status-legend");
+    container.html(""); // clear previous
 
+    const svg = container.append("svg")
+        .attr("width", 300)
+        .attr("height", 55);
 
+    function addDot(x, color, label) {
+        // Pulse circle (stronger glow)
+        const pulse = svg.append("circle")
+            .attr("cx", x)
+            .attr("cy", 22)
+            .attr("r", 5)
+            .attr("fill", color)
+            .attr("opacity", 0.35);
 
+        // Base dot
+        const base = svg.append("circle")
+            .attr("cx", x)
+            .attr("cy", 22)
+            .attr("r", 5)
+            .attr("fill", color)
+            .attr("opacity", 0.95);
 
+        // Enhanced pulse animation
+        function animate() {
+            pulse.transition()
+                .duration(2000)
+                .ease(d3.easeSinInOut)
+                .attr("r", 22)           // bigger expansion (was 14)
+                .attr("opacity", 0)      // fade out gradually
+                .on("end", () => {
+                    pulse.attr("r", 6).attr("opacity", 0.35);
+                    animate();
+                });
+        }
+        animate();
+
+        // Label
+        svg.append("text")
+            .attr("x", x + 20)
+            .attr("y", 26)
+            .attr("fill", "white")
+            .attr("font-size", "13px")
+            .text(label);
+    }
+
+    // Spaced evenly
+    addDot(25, "#00ff00", "Market Open");
+    addDot(170, "#ff0000", "Market Closed");
+}
+
+// Call after map loads
+createMarketStatusLegend();

@@ -12,8 +12,8 @@
 <body class="{% block body_class %}{% endblock %}">
     <header class="header">
         <nav class="menu">
-            <span class="menu-item equities {% if request.resolver_match.url_name == 'equities' %}active{% endif %}">
-                <a href="{% url 'equities' %}">Equities</a>
+            <span class="menu-item history {% if request.resolver_match.url_name == 'history' %}active{% endif %}">
+                <a href="{% url 'history' %}">History</a>
             </span>
             <span class="menu-item markets {% if request.resolver_match.url_name == 'markets' %}active{% endif %}">
                 <a href="{% url 'markets' %}">Markets</a>

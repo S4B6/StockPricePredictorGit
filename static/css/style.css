@@ -32,7 +32,7 @@ body {
   transition: 0ms;
 }
 
-.page-equities {
+.page-history {
   background: linear-gradient(180deg, black, rgb(17, 0, 24), black);
   min-height: 100vh;
 }
@@ -79,7 +79,7 @@ body {
 }
 
 /* Individual color styling for each menu item */
-.equities a {
+.history a {
   color: #ff00f1; /* Purple */
 }
 
@@ -113,26 +113,26 @@ body {
   text-decoration: none;      /* No underline on hover for Predictor */
 }
 
-.equities.active a,
+.history.active a,
 .markets.active a,
 .about.active a {
     position: relative;
 }
 
-.equities.active a::after,
+.history.active a::after,
 .markets.active a::after,
 .about.active a::after {
     content: "";
     position: absolute;
     bottom: 0; /* Aligns with the bottom of the text */
-    left: 10%; /* Start a bit in from the left */
-    width: 80%; /* Cover only 80% of the text width */
+    left: 13%; /* Start a bit in from the left */
+    width: 66%; /* Cover only 80% of the text width */
     height: 2px; /* Thickness of the underline */
     background-color: currentColor; /* Inherits the color of the text */
 }
 
-.equities.active a::after {
-    background-color: #ff00f1; /* Color for equities */
+.history.active a::after {
+    background-color: #ff00f1; /* Color for history */
 }
 
 .markets.active a::after {
@@ -159,4 +159,5 @@ body {
 .content-wrapper {
   padding-top: 200px;
 }
+
 

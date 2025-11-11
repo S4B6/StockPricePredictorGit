@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import AllCountriesStockPerformance, AllRegionsStockPerformance
-from .utils import get_main_countries_status
-
+from .utils import get_all_market_info
 import json
 
 def markets(request):
@@ -42,4 +41,4 @@ def regions_performance_data(request):
     return JsonResponse(list(data), safe=False)
 
 def market_status_api(request):
-    return JsonResponse(get_main_countries_status(), safe=False)
+    return JsonResponse(get_all_market_info(), safe=False)

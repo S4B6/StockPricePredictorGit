@@ -58,7 +58,7 @@ h3 {
     font-size: 1.5em;
     z-index: 1000;
     display: none; /* Initially hidden */
-    border-top: 1px solid rgb(24, 24, 24);
+    border-top: 1px solid rgb(130, 130, 130);
     display: flex; /* Enable flexbox for horizontal layout */
     justify-content: space-between; /* Space between hierarchy text and arrow */
     align-items: center; /* Center vertically */
@@ -350,3 +350,42 @@ h3 {
 }
 
 
+/*Dots in the map that say if market is closed or open*/
+
+/* Tooltip for market dots – clean, white, flat style */
+#market-tooltip {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);           /* white background */
+    color: #111;                   /* dark text */
+    padding: 4px 4px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    line-height: 1.2;
+    pointer-events: none;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 1;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#market-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Style for the colored dot inside the tooltip */
+.market-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+#market-status-legend {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
