@@ -1,0 +1,91 @@
+.history-hero {
+  text-align: center;
+  margin-bottom: 100px;
+  width: 1200px;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 1em;
+  background-color: #ff8000;
+  margin-left: 4px;
+  animation: blink 0.8s infinite;
+  vertical-align: -2px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+h1 {
+  font-weight: 400 !important;
+  font-family: 'Courier Prime', monospace;
+}
+
+.history-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  padding: 0 10%;
+  justify-items: center;
+  width: 900PX;
+}
+
+/* Base style */
+.category-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  width: 100%;
+  border-radius: 0;
+  text-decoration: none;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 6px;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: #fff;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+}
+
+/* --- Flashy base colors --- */
+.equity { background-color: #ff00f1; }        /* neon magenta */
+.rates { background-color: #00ff00; color: #000; } /* neon green */
+.macro {background-color: #007bff;} /* cyan */
+.fx { background-color: #ff8000; color: #000; }    /* vivid orange */
+.crypto { background-color: #fff800; color: #000; } /* pure yellow */
+.commodities { background-color: #ff0000; }   /* red */
+.real-estate { background-color: #00fff7; color: #000; }   /* bright blue */
+.private-markets { background-color: #ff1493; } /* neon pink */
+
+/* --- Dark hover (pressed effect, almost black) --- */
+.equity:hover { background-color: #1a0018; color: #ff00f1; }
+.rates:hover { background-color: #001a00; color: #00ff00; }
+.macro:hover {background-color: #000d1a; color: #007bff;}
+.fx:hover { background-color: #1a0d00; color: #ff8000; }
+.crypto:hover { background-color: #1a1800; color: #fff800; }
+.commodities:hover { background-color: #1a0000; color: #ff0000; }
+.real-estate:hover { background-color: #001a1a; color: #00fff7; }
+.private-markets:hover { background-color: #1a0010; color: #ff1493; }
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .history-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.category-card {
+  text-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+.category-card:hover {
+  text-shadow: 0 0 8px currentColor;
+}

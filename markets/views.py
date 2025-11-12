@@ -5,7 +5,7 @@ from .utils import get_all_market_info
 import json
 
 def markets(request):
-    return render(request, 'markets.html')
+    return render(request, 'markets/markets.html')
 
 
 def countries_performance_data(request):

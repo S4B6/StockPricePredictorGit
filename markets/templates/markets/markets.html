@@ -5,11 +5,8 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/markets.css' %}">
+    <script src="{% static 'js/typing.js' %}"></script>
 
-    <div class="page-introduction"></div>
-
-    <!-- Link to your external JavaScript file -->
-    <script src="{% static 'js/typing_effect.js' %}"></script>
 
     <div id="sticky-nav">
         <span id="hierarchy-text"></span> <!-- This span will display the hierarchy text -->
@@ -20,7 +17,7 @@
 
     <!-- Main Content Structure with clear section hierarchy -->
     <section id="equities" class="main-section">
-    <h1 class="section-title">Equities</h1>
+    <h1 class="section-title" data-typed="Equities" data-speed="40" data-delay="200"></h1>
 
         <div id="all-countries" class="sub-section">
             <h2 class="sub-section-title">

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}page-history{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/history.css' %}">
+
+<section class="history-hero">
+  <h1>Decades of Data. Patterns that Matter. <span class="typing-cursor"></span></h1>
+</section>
+
+
+<section class="history-categories">
+  <a href="{% url 'history_category' 'equity' %}" class="category-card equity">Macro</a>
+  <a href="{% url 'history_category' 'rates' %}" class="category-card rates">Equity</a>
+  <a href="{% url 'history_category' 'macro' %}" class="category-card macro">Credit</a>
+  <a href="{% url 'history_category' 'fx' %}" class="category-card fx">Rates</a>
+  <a href="{% url 'history_category' 'crypto' %}" class="category-card crypto">Commodities</a>
+  <a href="{% url 'history_category' 'commodities' %}" class="category-card commodities">FX</a>
+  <a href="{% url 'history_category' 'real-estate' %}" class="category-card real-estate">Real&nbsp;Estate</a>
+  <a href="{% url 'history_category' 'private-markets' %}" class="category-card private-markets">Crypto</a>
+</section>
+{% endblock %}
+
+
+
+
+
+<!--{% include "history/components/chart.html" %}
+{% include "history/components/download.html" %}
+{% include "history/components/analysis.html" %}
+-->

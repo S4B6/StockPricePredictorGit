@@ -15,6 +15,7 @@ body, main, footer, header, div{
 
 /* Link to Google Fonts for Courier Prime */
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 body, html, .header {
   margin: 0;
@@ -71,6 +72,8 @@ body {
   justify-content: center;
   padding: 20px 0;
   display: flex;
+  font-family: 'Share Tech Mono', monospace;
+  text-shadow: 0 0 8px currentColor;
 }
 
 .menu-item a {
@@ -111,6 +114,7 @@ body {
   background-color: #fff800;  /* Yellow background on hover */
   color: black;               /* Black text on hover */
   text-decoration: none;      /* No underline on hover for Predictor */
+  text-shadow: 0 0 0px currentColor;
 }
 
 .history.active a,
@@ -149,6 +153,7 @@ body {
   background-color: #fff800;  /* Yellow background on hover */
   color: black;               /* Black text on hover */
   text-decoration: none;      /* No underline on hover for Predictor */
+  text-shadow: 0 0 0px currentColor;
 }
 
 
@@ -161,3 +166,51 @@ body {
 }
 
 
+
+
+/******************************************************/
+/* Footer */
+/******************************************************/
+
+
+.site-footer {
+  margin-top: 80px;
+  padding: 30px 0 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: #ffffff80;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-links a:hover {
+  background: #242424; /* matches your neon aesthetic */
+}
+
+.separator {
+  opacity: 0.5;
+}
+
+.divider {
+  color: #ffffff;
+}
+
+.footer-copy {
+  opacity: 0.7;
+  font-size: 13px;
+}

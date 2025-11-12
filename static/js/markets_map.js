@@ -463,7 +463,7 @@ async function updateMarketStatusLights(svg, projection) {
 
                 const exchangeNamesOverride = {
         "US": "NYSE, NASDAQ",
-        "China": "Shanghai, Shenzhen",
+        "China": "SSE, SZSE",
         "India": "NSE, BSE",
         "Japan": "Tokyo Stock Exchange",
         "United Kingdom": "London Stock Exchange",
@@ -568,7 +568,9 @@ baseDot
         tooltip.html(info)
             .style("visibility", "visible")
             .style("left", (event.pageX + 14) + "px")
-            .style("top", (event.pageY - 10) + "px");
+            .style("top", (event.pageY - 10) + "px")
+            .style("border", `1px solid`)
+            .style("border-radius", "0px");
 
         d3.select(this)
             .transition()

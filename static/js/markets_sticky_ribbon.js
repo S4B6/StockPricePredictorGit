@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mainSections = document.querySelectorAll('h1');
     mainSections.forEach(section => {
         const link = document.createElement('a');
-        link.textContent = section.textContent;
+        link.textContent = section.textContent || section.dataset.typed || 'Untitled';
         link.href = `#${section.parentElement.id}`;
         
         // Add event listener to close dropdown on link click
