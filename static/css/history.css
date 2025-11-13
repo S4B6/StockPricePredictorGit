@@ -1,8 +1,14 @@
+
+/******************************************************/
+/* Intro */
+/******************************************************/
+
 .history-hero {
   text-align: center;
   margin-bottom: 100px;
-  width: 1200px;
+  width: 100%;
 }
+
 
 .typing-cursor {
   display: inline-block;
@@ -30,19 +36,25 @@ h1 {
 
 .history-categories {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
-  padding: 0 10%;
   justify-items: center;
-  width: 900PX;
+  width: 100%;
 }
+
+
+
+/******************************************************/
+/* Level 1 */
+/******************************************************/
+
 
 /* Base style */
 .category-card {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 140px;
+  height: 110px;
   width: 100%;
   border-radius: 0;
   text-decoration: none;
@@ -50,31 +62,26 @@ h1 {
   letter-spacing: 6px;
   font-size: 1.3rem;
   letter-spacing: 1px;
-  color: #fff;
+  color: #000000;
   font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
   border: none;
 }
 
 /* --- Flashy base colors --- */
-.equity { background-color: #ff00f1; }        /* neon magenta */
-.rates { background-color: #00ff00; color: #000; } /* neon green */
-.macro {background-color: #007bff;} /* cyan */
-.fx { background-color: #ff8000; color: #000; }    /* vivid orange */
-.crypto { background-color: #fff800; color: #000; } /* pure yellow */
-.commodities { background-color: #ff0000; }   /* red */
-.real-estate { background-color: #00fff7; color: #000; }   /* bright blue */
-.private-markets { background-color: #ff1493; } /* neon pink */
+.macro { background-color: #ff00f1; }        /* neon magenta */
+.equity { background-color: #00ff00; color: #000; } /* neon green */
+.rates { background-color: #ff8000; }    /* vivid orange */
+.commodities { background-color: #fff800; color: #000; } /* pure yellow */
+.currencies { background-color: #ff0000; }   /* red */
+.real-assets { background-color: #00fff7; color: #000; }   /* bright blue */
 
 /* --- Dark hover (pressed effect, almost black) --- */
-.equity:hover { background-color: #1a0018; color: #ff00f1; }
-.rates:hover { background-color: #001a00; color: #00ff00; }
-.macro:hover {background-color: #000d1a; color: #007bff;}
-.fx:hover { background-color: #1a0d00; color: #ff8000; }
-.crypto:hover { background-color: #1a1800; color: #fff800; }
-.commodities:hover { background-color: #1a0000; color: #ff0000; }
-.real-estate:hover { background-color: #001a1a; color: #00fff7; }
-.private-markets:hover { background-color: #1a0010; color: #ff1493; }
+.macro:hover { background-color: #1a0018; color: #ff00f1; }
+.equity:hover { background-color: #001a00; color: #00ff00; }
+.rates:hover { background-color: #1a0d00; color: #ff8000; }
+.commodities:hover { background-color: #1a1800; color: #fff800; }
+.currencies:hover { background-color: #1a0000; color: #ff0000; }
+.real-assets:hover { background-color: #001a1a; color: #00fff7; }
 
 /* Responsive */
 @media (max-width: 1000px) {
@@ -83,9 +90,159 @@ h1 {
   }
 }
 
-.category-card {
-  text-shadow: 0 0 6px rgba(255,255,255,0.25);
-}
 .category-card:hover {
-  text-shadow: 0 0 8px currentColor;
+  /*text-shadow: 0 0 8px currentColor;*/
+  filter: brightness(1);
+  color: white;
+}
+
+/* Dim non-active cards (keeps layout unchanged) */
+.dimmed { filter: brightness(0.15);}
+
+
+
+/******************************************************/
+/* Back button */
+/******************************************************/
+
+/* Back button default hidden */
+#back-btn {
+  display: none;
+}
+
+/* Show only when sub-section is visible */
+#sub-section.visible #back-btn {
+  display: block;
+}
+
+/* Minimal futuristic back icon (symbol only) */
+.back-icon {
+  margin: 48px auto 0; width: 42px; height: 42px;
+  border: 1px solid #ff800000; border-radius: 0%;
+  background: transparent; position: relative; cursor: pointer;
+}
+.back-icon::before {
+  content: "⟵"; position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: 'Courier Prime', monospace; font-size: 1.2rem; color: #ffffff;
+}
+.back-icon:hover { background: #242424;}
+.back-icon:hover::before { color: #ffffff; }
+
+
+
+/******************************************************/
+/* Level 1 */
+/******************************************************/
+
+
+/* Sub-section (appears below) */
+#sub-section { 
+  text-align: center; margin-top: 90px;
+}
+
+/* Keep the active box fully visible, no hover reaction */
+.category-card.active,
+.category-card.active:hover {
+  filter: none;
+  transform: none;
+  cursor: default;
+  pointer-events: none;
+  /*text-shadow: 0 0 8px currentColor;*/
+  /*text-shadow: 0 0 8px currentColor;*/
+  /* Preserve its original color (no "inherit") */
+}
+
+/* Instant transparent state */
+.history-hero.transparent {
+  opacity: 0;
+  pointer-events: none;
+  transition: none;
+}
+
+
+
+/* ====== LEVEL 2/3/4 STRUCTURE ====== */
+
+
+
+#sub-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* same width as your 2×3 top grid */
+  gap: 25px;
+  width: 900px;
+  margin: 50px auto 0;
+}
+
+.sub-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sub-box {
+  height: 50px;                   /* smaller height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.05rem;
+  cursor: pointer;
+  border-radius: 0;
+  text-align: center;
+}
+
+/* Make leaves even smaller */
+.sub-box.leaf {
+  height: auto;
+  padding: 10px 0;
+  background: none;
+}
+
+.sub-box.leaf:hover {
+  background: #242424;
+}
+
+/* Folder-like subcategories (those that open a deeper level) */
+.sub-box.nav {
+  font-weight: 600;
+}
+
+/* Theme colors for folders */
+.sub-theme-macro .sub-box.nav       { background-color: #ff00f1; color: #000;}
+.sub-theme-equity .sub-box.nav      { background-color: #00ff00; color: #000;}
+.sub-theme-rates .sub-box.nav       { background-color: #ff8000;color: #000;}
+.sub-theme-currencies .sub-box.nav  { background-color: #ff0000;color: #000;}
+.sub-theme-commodities .sub-box.nav { background-color: #fff800;color: #000;}
+.sub-theme-real-assets .sub-box.nav { background-color: #00fff7;color: #000;}
+
+/* Slightly darker on hover */
+.sub-theme-macro .sub-box.nav:hover,
+.sub-theme-equity .sub-box.nav:hover,
+.sub-theme-rates .sub-box.nav:hover,
+.sub-theme-currencies .sub-box.nav:hover,
+.sub-theme-commodities .sub-box.nav:hover,
+.sub-theme-real-assets .sub-box.nav:hover { background-color: #1a0018; color: white; }
+
+/* Theme-colored leaf text (non-box links) */
+.sub-theme-macro .sub-box.leaf       { color: #ff00f1;  text-shadow: 0 0 8px currentColor;}  /* magenta */
+.sub-theme-equity .sub-box.leaf      { color: #00ff00; text-shadow: 0 0 8px currentColor;}  /* neon green */
+.sub-theme-rates .sub-box.leaf       { color: #ff8000; text-shadow: 0 0 8px currentColor;}  /* orange */
+.sub-theme-currencies .sub-box.leaf  { color: #ff0000; text-shadow: 0 0 8px currentColor;}  /* red */
+.sub-theme-commodities .sub-box.leaf { color: #fff800; text-shadow: 0 0 8px currentColor;}  /* yellow */
+.sub-theme-real-assets .sub-box.leaf { color: #00fff7; text-shadow: 0 0 8px currentColor;}  /* cyan */
+
+
+/* Keep the active box fully visible, no hover reaction */
+.sub-box.active-sub,
+.sub-box.active-sub:hover {
+  filter: none;
+  transform: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+
+.sub-box.dimmed:hover {
+    filter: brightness(1);   /* brighten */
 }

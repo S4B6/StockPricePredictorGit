@@ -10,24 +10,19 @@
   <h1>Decades of Data. Patterns that Matter. <span class="typing-cursor"></span></h1>
 </section>
 
-
-<section class="history-categories">
-  <a href="{% url 'history_category' 'equity' %}" class="category-card equity">Macro</a>
-  <a href="{% url 'history_category' 'rates' %}" class="category-card rates">Equity</a>
-  <a href="{% url 'history_category' 'macro' %}" class="category-card macro">Credit</a>
-  <a href="{% url 'history_category' 'fx' %}" class="category-card fx">Rates</a>
-  <a href="{% url 'history_category' 'crypto' %}" class="category-card crypto">Commodities</a>
-  <a href="{% url 'history_category' 'commodities' %}" class="category-card commodities">FX</a>
-  <a href="{% url 'history_category' 'real-estate' %}" class="category-card real-estate">Real&nbsp;Estate</a>
-  <a href="{% url 'history_category' 'private-markets' %}" class="category-card private-markets">Crypto</a>
+<section id="level1" class="history-categories visible">
+  <a href="javascript:void(0)" class="category-card macro" data-category="macro">Macro</a>
+  <a href="javascript:void(0)" class="category-card equity" data-category="equity">Equity</a>
+  <a href="javascript:void(0)" class="category-card rates" data-category="rates">Rates</a>
+  <a href="javascript:void(0)" class="category-card commodities" data-category="commodities">Commodities</a>
+  <a href="javascript:void(0)" class="category-card currencies" data-category="currencies">Currencies</a>
+  <a href="javascript:void(0)" class="category-card real-assets" data-category="real-assets">Real&nbsp;Assets</a>
 </section>
+
+<section id="sub-section" class="hidden">
+  <div id="sub-wrapper"></div>
+  <button class="back-icon" id="back-btn" aria-label="Back"></button>
+</section>
+
+<script src="{% static 'js/history_nav.js' %}"></script>
 {% endblock %}
-
-
-
-
-
-<!--{% include "history/components/chart.html" %}
-{% include "history/components/download.html" %}
-{% include "history/components/analysis.html" %}
--->
