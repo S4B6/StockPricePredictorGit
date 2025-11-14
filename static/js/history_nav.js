@@ -258,47 +258,35 @@ document.addEventListener("DOMContentLoaded", () => {
   // path = [rootKey, level2Label, level3Label, ...]
   const path = [];
 
-  // Get node at specific depth in the path:
-  // depth 0 -> root level (macro/equity/...)
-  // depth 1 -> its child, depth 2 -> grandchild, etc.
-// depth 0 -> root node (macro/equity/...)
-// depth 1 -> its child (e.g. "By Factor")
-// depth 2 -> its grandchild, etc.
-const getNodeAtDepth = depth => {
-  // If depth is deeper than the current path, nothing to show
-  if (depth >= path.length) return null;
+  const getNodeAtDepth = depth => {
+    if (depth >= path.length) return null;
 
-  let node = navTree[path[0]];
-  if (!node) return null;
-  if (depth === 0) return node;
-
-  for (let i = 1; i <= depth; i++) {
-    if (!node.children) return null;
-
-    if (Array.isArray(node.children)) {
-      // array of leafs -> no deeper navigation
-      return null;
-    }
-
-    const key = path[i];
-    node = node.children[key];
+    let node = navTree[path[0]];
     if (!node) return null;
-  }
+    if (depth === 0) return node;
 
-  return node;
-};
+    for (let i = 1; i <= depth; i++) {
+      if (!node.children) return null;
+
+      if (Array.isArray(node.children)) return null;
+
+      const key = path[i];
+      node = node.children[key];
+      if (!node) return null;
+    }
+    return node;
+  };
 
   const renderLevel = () => {
     if (!path.length) return;
 
-    // Apply theme on sub-section
     subSection.classList.remove("hidden");
     subSection.classList.add("visible");
+
     Object.values(themeClass).forEach(cls => subSection.classList.remove(cls));
     const rootKey = path[0];
     if (themeClass[rootKey]) subSection.classList.add(themeClass[rootKey]);
 
-    // Reset wrapper and create 3 columns
     subWrapper.innerHTML = "";
     const columns = [];
     for (let i = 0; i < 3; i++) {
@@ -308,32 +296,22 @@ const getNodeAtDepth = depth => {
       columns.push(colDiv);
     }
 
-    // For each depth (0 = L2 column, 1 = L3 column, 2 = L4 column)
     for (let depth = 0; depth < 3; depth++) {
       const node = getNodeAtDepth(depth);
       if (!node || !node.children) continue;
 
-      let children;
-      if (Array.isArray(node.children)) {
-        children = node.children;
-      } else {
-        children = Object.keys(node.children);
-      }
+      let children = Array.isArray(node.children)
+        ? node.children
+        : Object.keys(node.children);
 
       if (!children.length) continue;
 
       const colDiv = columns[depth];
-
-      // Active label at this depth (the branch we are currently in)
-      // For column depth = 0, active child label is path[1]
-      // For depth = 1, active child is path[2], etc.
       const activeLabel = path[depth + 1];
 
       children.forEach(label => {
         let nextNode = null;
-        if (!Array.isArray(node.children) && node.children) {
-          nextNode = node.children[label];
-        }
+        if (!Array.isArray(node.children)) nextNode = node.children[label];
 
         const hasNext =
           nextNode &&
@@ -345,38 +323,30 @@ const getNodeAtDepth = depth => {
 
         const box = document.createElement("div");
         box.classList.add("sub-box");
-        if (hasNext) {
-          box.classList.add("nav");
-        } else {
-          box.classList.add("leaf");
-        }
         box.textContent = label;
 
-        // Dim siblings, keep active one bright
+        if (hasNext) box.classList.add("nav");
+        else box.classList.add("leaf");
+
         if (activeLabel) {
-          if (label === activeLabel) {
-            box.classList.add("active-sub");
-          } else {
-            box.classList.add("dimmed");
-          }
+          if (label === activeLabel) box.classList.add("active-sub");
+          else box.classList.add("dimmed");
         }
 
         box.addEventListener("click", () => {
-          // We are clicking inside the column that corresponds to "depth"
-          // So the parent path is path.slice(0, depth + 1)
           const basePath = path.slice(0, depth + 1);
 
           if (hasNext) {
-            // Go deeper or change branch at this level
-            path.length = basePath.length; // cut deeper levels
+            path.length = basePath.length;
             path.push(label);
             renderLevel();
           } else {
-            // Leaf -> go to page
             const slug = [...basePath, label]
               .map(x => x.toLowerCase().replace(/\s+/g, "-"))
               .join("/");
-            window.location.href = `/history/${slug}/`;
+
+            // **Only on leaf → transition**
+            navigateWithTransition(`/history/${slug}/`);
           }
         });
 
@@ -410,7 +380,6 @@ const getNodeAtDepth = depth => {
       return;
     }
 
-    // Back to initial state
     path.length = 0;
 
     if (hero) hero.classList.remove("transparent");
@@ -422,7 +391,6 @@ const getNodeAtDepth = depth => {
     subWrapper.innerHTML = "";
   };
 
-  // Bind events
   level1.querySelectorAll(".category-card").forEach(card =>
     card.addEventListener("click", () => openRoot(normalize(card.dataset.category)))
   );

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}history-detail{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/history_detail.css' %}">
+
+<div class="history-detail {{ theme }}">
+    <section class="history-detail-wrapper">
+
+        <header class="history-header">
+            <h1 class="history-title-animated"
+                data-typed="{{ page.title }}"
+                data-speed="20"
+                data-delay="200"></h1>
+            <p class="meta" >Last updated: {{ page.last_update|date:"F j, Y" }}</p>
+        </header>
+
+        <article class="history-body">
+            {{ content_html|safe }}
+        </article>
+
+    </section>
+</div>
+
+<script src="{% static 'js/history_tooltips.js' %}"></script>
+
+{% endblock %}

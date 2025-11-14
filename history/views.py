@@ -1,61 +1,162 @@
 import pandas as pd
 import plotly.express as px
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from sqlalchemy import create_engine
 from django.http import HttpResponse
 import io
 
+from django.utils.html import escape
+from urllib.parse import quote
+from django.urls import reverse
+
+from .models import HistoryPage, HistoryChart
 def history_category(request, category):
     return render(request, "history/category.html", {"category": category.capitalize()})
 
-def history(request):
+def history_home(request):
+    return render(request, "history/history.html")
+
+def history_detail(request, slug):
+    page = get_object_or_404(HistoryPage, slug=slug)
+
     engine = create_engine("postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db")
 
-    query = """
-        SELECT *
-        FROM macro_indicators_values
-        WHERE indicator_code IN ('ECB_DF', 'ECB_MRO', 'ECB_MLF', 'ESTER')
-        ORDER BY date
+    charts_data = []
+    for chart in page.charts.all().order_by("order"):
+        df = pd.read_sql(chart.sql_query, engine)
+        fig = make_clean_plot(df, chart.chart_type, chart.title)
+
+        html = fig.to_html(
+            full_html=False,
+            include_plotlyjs=False,
+            config=dict(
+                displayModeBar=False,
+                scrollZoom=False,
+                staticPlot=False
+            )
+        )
+
+        charts_data.append({
+            "title": chart.title,
+            "html": html,
+            "show_download": chart.show_download,
+        })
+
+        content_html = page.content
+        print("DEBUG CONTENT:", content_html)
+        leftover_blocks = []
+
+        for idx, c in enumerate(charts_data, start=1):
+            placeholder = f"[CHART{idx}]"
+
+            download_url = (
+                reverse("history_download")
+                + f"?slug={quote(page.slug, safe='')}&chart={quote(c['title'], safe='')}"
+                if c["show_download"] else ""
+            )
+
+            chart_block = f"""
+            <div class="history-chart-block">
+
+                <div class="chart-header-center">
+                    <div class="chart-title">{escape(c['title'])}</div>
+
+                    {(
+                        f'<a class="chart-download-btn" href="{download_url}" title="Download CSV">⬇</a>'
+                    ) if download_url else ''}
+                </div>
+
+                <div class="history-chart">
+                    {c['html']}
+                </div>
+
+            </div>
+            """
+
+            if placeholder in content_html:
+                content_html = content_html.replace(placeholder, chart_block)
+            else:
+                leftover_blocks.append(chart_block)
+
+        if leftover_blocks:
+            content_html += "\n".join(leftover_blocks)
+
+    return render(request, "history/detail.html", {
+        "page": page,
+        "content_html": content_html,  # <-- THIS is the important one
+        "theme": page.asset_class.lower(),
+    })
+
+
+
+def make_clean_plot(df, chart_type, title):
     """
-    df = pd.read_sql(query, engine)
+    Generic chart builder using your ECB-style formatting
+    for ALL charts (line, area, bar).
+    Assumes at least columns: date, value.
+    Optionally a 'series' column like 'indicator_code' for colors.
+    """
 
-    fig = px.line(
-        df,
-        x="date",
-        y="value",
-        color="indicator_code",
-        line_shape="hv",
-    )
+    # Try to detect a "series" column for multiple lines
+    color_col = None
+    for candidate in ["indicator_code", "series", "name", "label"]:
+        if candidate in df.columns:
+            color_col = candidate
+            break
 
-    # remove unwanted legend title
+    # ---- 1) Base figure by type ----
+    if chart_type == "line":
+        if color_col:
+            fig = px.line(
+                df,
+                x="date",
+                y="value",
+                color=color_col,
+                line_shape="hv",
+            )
+        else:
+            fig = px.line(
+                df,
+                x="date",
+                y="value",
+                line_shape="hv",
+            )
+    elif chart_type == "area":
+        if color_col:
+            fig = px.area(df, x="date", y="value", color=color_col)
+        else:
+            fig = px.area(df, x="date", y="value")
+    else:  # "bar"
+        if color_col:
+            fig = px.bar(df, x="date", y="value", color=color_col)
+        else:
+            fig = px.bar(df, x="date", y="value")
+
+    # Remove legend title
     fig.update_layout(legend_title_text="")
 
+    # ---- 2) Universal styling (copied from your ECB chart) ----
     fig.update_layout(
         template="plotly_dark",
-        paper_bgcolor="#0d0017",      # match site background
+        paper_bgcolor="#0d0017",
         plot_bgcolor="#0d0017",
-        font=dict(family="Courier Prime", color="#f5f5f5", size=13),
+        font=dict(family="Courier Prime", color="#ffffff", size=13),
 
-        title=dict(
-            text="ECB Policy & Money Market Rates",
-            x=0.5,
-            xanchor="center",
-            font=dict(size=20, color="#ffffff")
-        ),
+        title=None,  # 👈 remove plotly title
 
         xaxis=dict(
             title="",
             gridcolor="rgba(255,255,255,0.1)",
             zeroline=False,
             showline=False,
-            tickfont=dict(color="#d1d1d1"),
+            tickfont=dict(color="#ffffff"),
         ),
         yaxis=dict(
             title="%",
             gridcolor="rgba(255,255,255,0.1)",
             zeroline=False,
             showline=False,
-            tickfont=dict(color="#d1d1d1"),
+            tickfont=dict(color="#ffffff"),
         ),
 
         legend=dict(
@@ -65,67 +166,48 @@ def history(request):
             xanchor="center",
             x=0.5,
             bgcolor="rgba(0,0,0,0)",
-            font=dict(size=12, color="#e0e0e0"),
+            font=dict(size=12, color="#ffffff"),
         ),
 
-        margin=dict(l=40, r=40, t=60, b=40),
+        margin=dict(l=40, r=40, t=40, b=40),  # reduced because title is gone
         height=420,
+        hovermode="x unified",
+
+        xaxis_hoverformat="%d %b %Y"  # <-- show day-month-year once on top
     )
 
-
-    fig.update_traces(line=dict(width=2.5))
-    fig.update_traces(selector=dict(name="ECB_MRO"), line=dict(color="#4682B4"))  # bluish
-    fig.update_traces(selector=dict(name="ECB_MLF"), line=dict(color="#FF6347"))  # reddish
-    fig.update_traces(selector=dict(name="ECB_DF"),  line=dict(color="#00FFDD"))  # bright green
-    fig.update_traces(selector=dict(name="ESTER"),   line=dict(color="#F2FF3A"))  # magenta
-
+    # ---- 3) Line style & hover style ----
     fig.update_traces(
+        line=dict(width=2.5),
         mode="lines+markers",
         marker=dict(size=4, opacity=0),
         hovertemplate="<b>%{fullData.name}</b><br>%{y:.2f}%<extra></extra>"
     )
 
-    fig.update_layout(
-        hovermode="x unified",  # one shared hover box with one date header
-        hoverlabel=dict(
-            bgcolor="#1c1c1c",
-            bordercolor="#ffffff",
-            font_size=12,
-            font_family="JetBrains Mono, monospace"
-        ),
-        xaxis_hoverformat="%d %b %Y"  # <-- show day-month-year once on top
+    return fig
+
+
+def download_chart_csv(request):
+    slug = request.GET.get("slug")
+    chart_title = request.GET.get("chart")
+
+    page = get_object_or_404(HistoryPage, slug=slug)
+    chart = get_object_or_404(
+        HistoryChart,
+        page=page,
+        title__iexact=chart_title.strip()
     )
 
-    # Hide toolbar & simplify interactivity
-    chart_html = fig.to_html(
-        full_html=False,
-       include_plotlyjs=False,
-        config=dict(
-            displayModeBar=False,   # hides toolbar
-            scrollZoom=False,       # disable zoom
-            staticPlot=False        # allows hover but disables drag/zoom
-        )
-    )
-
-    return render(request, "history/history.html", {"chart": chart_html})
-
-
-def download_macro_data(request):
     engine = create_engine("postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db")
-    query = """
-        SELECT *
-        FROM macro_indicators_values
-        WHERE indicator_code IN ('ECB_DF', 'ECB_MRO', 'ECB_MLF', 'ESTER')
-        ORDER BY date
-    """
-    df = pd.read_sql(query, engine)
+    
+    df = pd.read_sql(chart.sql_query, engine)
 
-    # Convert DataFrame → CSV (in memory)
     buffer = io.StringIO()
     df.to_csv(buffer, index=False)
     buffer.seek(0)
 
-    # Return downloadable file
+    filename = chart_title.lower().replace(" ", "_") + ".csv"
+
     response = HttpResponse(buffer.getvalue(), content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="ecb_rates_history.csv"'
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response

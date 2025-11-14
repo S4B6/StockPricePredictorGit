@@ -569,7 +569,7 @@ baseDot
             .style("visibility", "visible")
             .style("left", (event.pageX + 14) + "px")
             .style("top", (event.pageY - 10) + "px")
-            .style("border", `1px solid`)
+            .style("border", `1px solid rgb(66,66,66)`)
             .style("border-radius", "0px");
 
         d3.select(this)

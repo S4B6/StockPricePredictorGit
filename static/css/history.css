@@ -69,11 +69,11 @@ h1 {
 
 /* --- Flashy base colors --- */
 .macro { background-color: #ff00f1; }        /* neon magenta */
-.equity { background-color: #00ff00; color: #000; } /* neon green */
+.equity { background-color: #00ff00;} /* neon green */
 .rates { background-color: #ff8000; }    /* vivid orange */
-.commodities { background-color: #fff800; color: #000; } /* pure yellow */
+.commodities { background-color: #fff800;} /* pure yellow */
 .currencies { background-color: #ff0000; }   /* red */
-.real-assets { background-color: #00fff7; color: #000; }   /* bright blue */
+.real-assets { background-color: #00fff7;}   /* bright blue */
 
 /* --- Dark hover (pressed effect, almost black) --- */
 .macro:hover { background-color: #1a0018; color: #ff00f1; }
@@ -217,12 +217,12 @@ h1 {
 .sub-theme-real-assets .sub-box.nav { background-color: #00fff7;color: #000;}
 
 /* Slightly darker on hover */
-.sub-theme-macro .sub-box.nav:hover,
-.sub-theme-equity .sub-box.nav:hover,
-.sub-theme-rates .sub-box.nav:hover,
-.sub-theme-currencies .sub-box.nav:hover,
-.sub-theme-commodities .sub-box.nav:hover,
-.sub-theme-real-assets .sub-box.nav:hover { background-color: #1a0018; color: white; }
+.sub-theme-macro .sub-box.nav:hover { background-color: #1a0018; color: #ff00f1; }
+.sub-theme-equity .sub-box.nav:hover { background-color: #1a0018; color: #00ff00; }
+.sub-theme-rates .sub-box.nav:hover { background-color: #1a0018; color: #ff8000; }
+.sub-theme-currencies .sub-box.nav:hover { background-color: #1a0018; color: #ff0000; }
+.sub-theme-commodities .sub-box.nav:hover { background-color: #1a0018; color: #fff800; }
+.sub-theme-real-assets .sub-box.nav:hover { background-color: #1a0018; color: #00fff7; }
 
 /* Theme-colored leaf text (non-box links) */
 .sub-theme-macro .sub-box.leaf       { color: #ff00f1;  text-shadow: 0 0 8px currentColor;}  /* magenta */
@@ -245,4 +245,17 @@ h1 {
 
 .sub-box.dimmed:hover {
     filter: brightness(1);   /* brighten */
+}
+
+
+
+
+/*SPECIAL FOR CHANING PAGES*/
+
+/* Freeze all transitions inside history nav to avoid jump */
+.freeze-history-nav #sub-section,
+.freeze-history-nav #level1,
+.freeze-history-nav * {
+    transition: none !important;
+    animation: none !important;
 }
