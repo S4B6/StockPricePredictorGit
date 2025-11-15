@@ -19,9 +19,15 @@ def history_home(request):
 def history_detail(request, slug):
     page = get_object_or_404(HistoryPage, slug=slug)
 
-    engine = create_engine("postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db")
+    engine = create_engine(
+        "postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db"
+    )
 
+    # 1) Always start with the raw HTML content
+    content_html = page.content or ""
     charts_data = []
+
+    # 2) Build chart html blocks
     for chart in page.charts.all().order_by("order"):
         df = pd.read_sql(chart.sql_query, engine)
         fig = make_clean_plot(df, chart.chart_type, chart.title)
@@ -32,8 +38,8 @@ def history_detail(request, slug):
             config=dict(
                 displayModeBar=False,
                 scrollZoom=False,
-                staticPlot=False
-            )
+                staticPlot=False,
+            ),
         )
 
         charts_data.append({
@@ -42,48 +48,44 @@ def history_detail(request, slug):
             "show_download": chart.show_download,
         })
 
-        content_html = page.content
-        print("DEBUG CONTENT:", content_html)
-        leftover_blocks = []
+    # 3) Replace [CHART1], [CHART2], ... placeholders (if any)
+    leftover_blocks = []
 
-        for idx, c in enumerate(charts_data, start=1):
-            placeholder = f"[CHART{idx}]"
+    for idx, c in enumerate(charts_data, start=1):
+        placeholder = f"[CHART{idx}]"
 
-            download_url = (
-                reverse("history_download")
-                + f"?slug={quote(page.slug, safe='')}&chart={quote(c['title'], safe='')}"
-                if c["show_download"] else ""
-            )
+        download_url = (
+            reverse("history_download")
+            + f"?slug={quote(page.slug, safe='')}&chart={quote(c['title'], safe='')}"
+            if c["show_download"] else ""
+        )
 
-            chart_block = f"""
-            <div class="history-chart-block">
-
-                <div class="chart-header-center">
-                    <div class="chart-title">{escape(c['title'])}</div>
-
-                    {(
-                        f'<a class="chart-download-btn" href="{download_url}" title="Download CSV">⬇</a>'
-                    ) if download_url else ''}
-                </div>
-
-                <div class="history-chart">
-                    {c['html']}
-                </div>
-
+        chart_block = f"""
+        <div class="history-chart-block">
+            <div class="chart-header-center">
+                <span class="chart-title">{escape(c['title'])}</span>
+                {(
+                    f'<a class="chart-download-btn" data-download '
+                    f'href="{download_url}" title="Download CSV">⬇</a>'
+                ) if download_url else ""}
             </div>
-            """
+            <div class="history-chart">
+                {c['html']}
+            </div>
+        </div>
+        """
 
-            if placeholder in content_html:
-                content_html = content_html.replace(placeholder, chart_block)
-            else:
-                leftover_blocks.append(chart_block)
+        if placeholder in content_html:
+            content_html = content_html.replace(placeholder, chart_block)
+        else:
+            leftover_blocks.append(chart_block)
 
-        if leftover_blocks:
-            content_html += "\n".join(leftover_blocks)
+    if leftover_blocks:
+        content_html += "\n".join(leftover_blocks)
 
     return render(request, "history/detail.html", {
         "page": page,
-        "content_html": content_html,  # <-- THIS is the important one
+        "content_html": content_html,
         "theme": page.asset_class.lower(),
     })
 

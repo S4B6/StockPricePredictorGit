@@ -10,6 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  /* ============================================
+     TRANSITION FUNCTION (minimal + non-intrusive)
+     ============================================ */
+  window.navigateWithTransition = function (url) {
+    document.body.style.transition = "opacity 0.15s ease-out";
+    document.body.style.opacity = "0";
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 180);
+  };
+
+
   const normalize = c => (c === "fx" ? "currencies" : c);
 
   const themeClass = {
@@ -102,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     children: {
       "Policy Rates": {
         children: [
-          "Federal Reserve",
+          "FED",
           "ECB",
           "Bank of England",
           "Bank of Japan",
@@ -333,6 +346,9 @@ document.addEventListener("DOMContentLoaded", () => {
           else box.classList.add("dimmed");
         }
 
+        // Prevent scroll jump on click
+        box.addEventListener("mousedown", e => e.preventDefault());
+
         box.addEventListener("click", () => {
           const basePath = path.slice(0, depth + 1);
 
@@ -395,4 +411,34 @@ document.addEventListener("DOMContentLoaded", () => {
     card.addEventListener("click", () => openRoot(normalize(card.dataset.category)))
   );
   backBtn.addEventListener("click", goBack);
+});
+
+
+/* ================================================
+   Reset Navigation Tree on Back/Forward Restore
+   ================================================ */
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+        // Page was restored from back/forward cache → reset everything
+        const subSection = document.getElementById("sub-section");
+        const subWrapper = document.getElementById("sub-wrapper");
+        const level1 = document.getElementById("level1");
+        const hero = document.querySelector(".history-hero");
+
+        // Restore initial state
+        if (hero) hero.classList.remove("transparent");
+
+        if (subSection) {
+            subSection.classList.remove("visible");
+            subSection.classList.add("hidden");
+        }
+
+        if (subWrapper) subWrapper.innerHTML = "";
+
+        if (level1) {
+            level1.querySelectorAll(".category-card").forEach(c =>
+                c.classList.remove("dimmed", "active")
+            );
+        }
+    }
 });

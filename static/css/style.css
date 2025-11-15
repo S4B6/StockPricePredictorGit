@@ -178,7 +178,6 @@ body.history-detail {
 .site-footer {
   margin-top: 150px;
   padding: 30px 0 40px;
-  border-top: 1px solid rgb(66,66,66);
   text-align: center;
   color: rgb(99, 99, 99);
   font-family: 'Courier New', monospace;
@@ -195,13 +194,14 @@ body.history-detail {
 }
 
 .footer-links a {
-  color: #ffffff;
+  color: rgb(99, 99, 99);
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  text-shadow: 0 0 8px currentColor;
 }
 
 .footer-links a:hover {
-  background: #242424; /* matches your neon aesthetic */
+  background: rgb(33, 33, 33); /* matches your neon aesthetic */
+  color: white;
 }
 
 .separator {
@@ -209,7 +209,7 @@ body.history-detail {
 }
 
 .divider {
-  color: #ffffff;
+  color: rgb(99, 99, 99);
 }
 
 .footer-copy {
@@ -217,3 +217,18 @@ body.history-detail {
   font-size: 13px;
 }
 
+
+
+
+/* =============================== */
+/* Page fade transition  */
+/* =============================== */
+
+/* Bloomberg Velvet Fade */
+.page-exit {
+    opacity: 0;
+    filter: brightness(0.85);
+    transition:
+        opacity 0.15s ease-out,
+        filter 0.15s ease-out;
+}

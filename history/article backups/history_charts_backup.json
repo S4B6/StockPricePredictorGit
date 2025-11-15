@@ -1,0 +1,20 @@
+[
+  {
+    "page_title": "ECB Key Policy Rates",
+    "page_slug": "rates/policy-rates/ecb",
+    "title": "ECB Key Policy Rates",
+    "chart_type": "line",
+    "order": 1,
+    "sql_query": "SELECT *\r\nFROM macro_indicators_values\r\nWHERE indicator_code IN ('ECB_DF','ECB_MRO','ECB_MLF')\r\nORDER BY date",
+    "show_download": true
+  },
+  {
+    "page_title": "template",
+    "page_slug": "template",
+    "title": "Federal Policy Rates",
+    "chart_type": "line",
+    "order": 1,
+    "sql_query": "SELECT *\r\nFROM macro_indicators_values\r\nWHERE indicator_code IN ('DFEDTARL','DFEDTARU')\r\nORDER BY date",
+    "show_download": true
+  }
+]

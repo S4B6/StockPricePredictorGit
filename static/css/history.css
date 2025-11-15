@@ -259,3 +259,11 @@ h1 {
     transition: none !important;
     animation: none !important;
 }
+
+
+
+
+/* Prevent browser auto-scrolling sub-box elements into view */
+.sub-box {
+    scroll-margin: 0 !important;
+}

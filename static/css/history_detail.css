@@ -54,11 +54,9 @@
 }
 .history-body h3 {
     font-size: 1.5rem;
-    color: #ff00f1;
 }
 .history-body h4 {
     font-size: 1.25rem;
-    color: #00fff7;
 }
 
 /* Paragraph spacing */
@@ -108,7 +106,8 @@
 .history-detail.rates .history-body h2 {
     border-color: #ff8000;
 }
-.history-detail.rates .history-body h3 {
+.history-detail.rates .history-body h3,
+.history-detail.rates .history-body h4 {
     color: #ff8000;
 }
 .history-detail.rates a {
@@ -122,7 +121,8 @@
 .history-detail.macro .history-body h2 {
     border-color: #ff00f1;
 }
-.history-detail.macro .history-body h3 {
+.history-detail.macro .history-body h3,
+.history-detail.macro .history-body h4 {
     color: #ff00f1;
 }
 .history-detail.macro a {
@@ -136,7 +136,8 @@
 .history-detail.equity .history-body h2 {
     border-color: #00ff00;
 }
-.history-detail.equity .history-body h3 {
+.history-detail.equity .history-body h3,
+.history-detail.equity .history-body h4 {
     color: #00ff00;
 }
 .history-detail.equity a {
@@ -150,7 +151,8 @@
 .history-detail.currencies .history-body h2 {
     border-color: #ff0000;
 }
-.history-detail.currencies .history-body h3 {
+.history-detail.currencies .history-body h3,
+.history-detail.currencies .history-body h4 {
     color: #ff0000;
 }
 .history-detail.currencies a {
@@ -164,7 +166,8 @@
 .history-detail.commodities .history-body h2 {
     border-color: #fff800;
 }
-.history-detail.commodities .history-body h3 {
+.history-detail.commodities .history-body h3,
+.history-detail.commodities .history-body h4 {
     color: #fff800;
 }
 .history-detail.commodities a {
@@ -178,7 +181,8 @@
 .history-detail.real-assets .history-body h2 {
     border-color: #00fff7;
 }
-.history-detail.real-assets .history-body h3 {
+.history-detail.real-assets .history-body h3,
+.history-detail.real-assets .history-body h4 {
     color: #00fff7;
 }
 .history-detail.real-assets a {
@@ -229,11 +233,11 @@
 .explain-tooltip {
     position: absolute;
     display: none;
-    max-width: 380px;
-    background: #fffdb7;
+    max-width: 300px;
+    background: #fffdb7f5;
     color: #000;
     padding: 10px 14px;
-    border-radius: 6px;
+    border-radius: 3px;
     font-size: 0.85rem;
     line-height: 1.45;
     z-index: 2000;
@@ -277,4 +281,27 @@
 
 .chart-download-btn:hover {
     background: #000000;
+}
+
+
+
+
+/*Coloured arrows*/
+
+/* Arrows */
+.up {
+    color: #46ff7b; /* soft green */
+    font-weight: 600;
+}
+
+.down {
+    color: #ff5c5c; /* soft red */
+    font-weight: 600;
+}
+
+/*Coloured AND in grey*/
+
+/* Arrows */
+.and {
+    color: grey;
 }

@@ -17,13 +17,13 @@
     <header class="header">
         <nav class="menu">
             <span class="menu-item history {% if request.resolver_match.url_name == 'history' %}active{% endif %}">
-                <a href="{% url 'history' %}">History</a>
+                <a href="{% url 'history' %}" data-transition>History</a>
             </span>
             <span class="menu-item markets {% if request.resolver_match.url_name == 'markets' %}active{% endif %}">
-                <a href="{% url 'markets' %}">Markets</a>
+                <a href="{% url 'markets' %}" data-transition>Markets</a>
             </span>
             <span class="menu-item predictor {% if request.resolver_match.url_name == 'predictor' %}active{% endif %}">
-                <a href="{% url 'predictor' %}">Predictor</a>
+                <a href="{% url 'predictor' %}" data-transition>Predictor</a>
             </span>
         </nav>
     </header>
@@ -52,6 +52,16 @@
         };
     </script>
     <script src="{% static 'js/page_transition.js' %}"></script>
+    <script>
+    window.addEventListener("pageshow", function (event) {
+        // If page was restored from back/forward cache,
+        // reset opacity & transform immediately
+        if (event.persisted) {
+            document.body.style.opacity = "1";
+            document.body.style.transform = "none";
+        }
+    });
+    </script>
 
 </body>
 </html>
