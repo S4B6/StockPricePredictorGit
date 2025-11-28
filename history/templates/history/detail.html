@@ -8,24 +8,31 @@
 <link rel="stylesheet" href="{% static 'css/history_detail.css' %}">
 
 <div class="history-detail {{ theme }}">
+
+        <div class="sticky-inner">
+            <header class="history-header">
+                <h1 class="history-title-animated"
+                    data-typed="{{ page.title }}"
+                    data-speed="20"
+                    data-delay="200"></h1>
+                <p class="meta">Last updated: {{ page.last_update|date:"F j, Y" }}</p>
+            </header>
+
+            <div id="mini-toc" class="mini-toc"></div>
+        </div>
+
+    <!-- page content wrapper -->
     <section class="history-detail-wrapper">
-
-        <header class="history-header">
-            <h1 class="history-title-animated"
-                data-typed="{{ page.title }}"
-                data-speed="20"
-                data-delay="200"></h1>
-            <p class="meta" >Last updated: {{ page.last_update|date:"F j, Y" }}</p>
-        </header>
-
         <article class="history-body">
             {{ content_html|safe }}
         </article>
-
     </section>
+
 </div>
 
+<script src="{% static 'js/history_toc.js' %}"></script>
 <script src="{% static 'js/history_tooltips.js' %}"></script>
 <script src="{% static 'js/history_download.js' %}"></script>
+<script src="{% static 'js/history_sticky_offset.js' %}"></script>
 
 {% endblock %}

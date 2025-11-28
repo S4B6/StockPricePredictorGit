@@ -33,6 +33,9 @@ class HistoryChart(models.Model):
             ("line", "Line Chart"),
             ("area", "Area Chart"),
             ("bar", "Bar Chart"),
+            ("heatmap_mm", "Money Market Heatmap"),
+            ("line_regime", "Line with Regime Shading"),
+            ("mad_hybrid", "Money Market MAD"),
         ],
         default="line"
     )

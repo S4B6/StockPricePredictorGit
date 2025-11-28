@@ -14,8 +14,8 @@ engine = create_engine(f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{
 
 # === Define file paths ===
 files = [
-    r"C:\Users\bouzi\Documents\finance_database\raw\macro\raw_money_market_rates.csv",
-    r"C:\Users\bouzi\Documents\finance_database\raw\macro\raw_policy_rates.csv"
+    r"C:\Users\bouzi\Documents\finance_database\raw\rates\raw_money_market_rates.csv",
+    r"C:\Users\bouzi\Documents\finance_database\raw\rates\raw_policy_rates.csv"
 ]
 
 # === Prepare SQL table name ===

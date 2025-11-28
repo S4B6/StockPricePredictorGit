@@ -1,4 +1,24 @@
+// -------------------------------------------------------
+// ABSOLUTE RESET — runs even before DOMContentLoaded
+// -------------------------------------------------------
+document.body.classList.remove("page-exit");
+
+
+// -------------------------------------------------------
+// Fix for browser back/forward cache (bfcache)
+// -------------------------------------------------------
+window.addEventListener("pageshow", (event) => {
+    document.body.classList.remove("page-exit");
+    document.body.classList.add("page-loaded");
+});
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    // 🔥 FIX for back navigation / cached pages
+    document.body.classList.remove("page-exit");
+
     document.body.classList.add("page-loaded");
 
     document.querySelectorAll("a[href]").forEach(link => {
@@ -14,15 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // ⛔ 2) IGNORE links forced to open in new tab
         if (link.getAttribute("target") === "_blank") return;
 
-        // ⛔ 3) INTERNAL PAGES ONLY
+        // ⛔ 3) Internal pages only
         try {
             const dest = new URL(url, window.location.origin);
             if (dest.origin !== window.location.origin) return;
-        } catch {
-            // not a valid URL (relative links will still pass)
-        }
+        } catch {}
 
-        // ✔  transition for all remaining internal page links
+        // ✔ fade-out animation
         link.addEventListener("click", e => {
             e.preventDefault();
             document.body.classList.add("page-exit");

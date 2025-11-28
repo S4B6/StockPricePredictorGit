@@ -115,15 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
     children: {
       "Policy Rates": {
         children: [
-          "FED",
+          "Fed",
           "ECB",
-          "Bank of England",
-          "Bank of Japan",
-          "PBoC",
-          "SNB",
-          "Bank of Canada",
-          "RBA",
-          "RBNZ"
+          "Global Overview"
         ]
       },
 

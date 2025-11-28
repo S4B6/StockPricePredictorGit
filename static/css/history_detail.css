@@ -2,13 +2,17 @@
    HISTORY DETAIL PAGE — Premium Research Layout
    ============================================================ */
 
+/* WRAPPER – remove huge empty top margin */
 .history-detail-wrapper {
     max-width: 900px;
-    margin: 80px auto 120px;
+    margin: 10px auto 120px;  /* <--- from 80px to 10px */
     padding: 0 20px;
-    font-family: 'Courier Prime', monospace;
-    color: #ffffff;
 }
+
+.sticky-inner {
+    padding: 0 20px;
+}
+
 
 /* -----------------------------
    HEADER (title + metadata)
@@ -85,7 +89,7 @@
 /* Horizontal rule */
 .history-body hr {
     border: none;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     margin: 40px 0;
 }
 
@@ -234,10 +238,10 @@
     position: absolute;
     display: none;
     max-width: 300px;
-    background: #fffdb7f5;
+    background: #fffdb7;
     color: #000;
     padding: 10px 14px;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 0.85rem;
     line-height: 1.45;
     z-index: 2000;
@@ -305,3 +309,40 @@
 .and {
     color: grey;
 }
+
+
+/* -------- MINI TOC (Table of Contents) -------- */
+
+.mini-toc {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px 0 35px 0;
+    padding-bottom: 5px;
+}
+
+.mini-toc a {
+    font-family: "Courier Prime", monospace;
+    font-size: 14px;
+    padding: 5px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0px;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(3px);
+}
+
+.mini-toc a:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.08);
+}
+
+.history-body h2 {
+    scroll-margin-top: 100px;  /* adjust if needed */
+}
+
+
+
