@@ -349,7 +349,7 @@ h3 {
 #market-tooltip {
     position: absolute;
     background: rgb(255, 255, 255);           /* white background */
-    color: #111;                   /* dark text */
+    color: #000000;                   /* dark text */
     padding: 4px 4px;
     border-radius: 2px;
     font-size: 12px;

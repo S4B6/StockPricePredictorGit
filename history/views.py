@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import plotly.express as px
 from django.shortcuts import render, get_object_or_404
 from sqlalchemy import create_engine
@@ -8,6 +9,19 @@ from django.utils.html import escape
 from urllib.parse import quote
 from django.urls import reverse
 from .models import HistoryPage, HistoryChart
+from sklearn.linear_model import LinearRegression
+import plotly.graph_objects as go
+import calendar
+from functools import lru_cache
+
+engine = create_engine(
+    "postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db"
+)
+
+@lru_cache(maxsize=50)
+def cached_sql(sql):
+    return pd.read_sql(sql, engine)
+
 
 def history_category(request, category):
     return render(request, "history/category.html", {"category": category.capitalize()})
@@ -18,17 +32,13 @@ def history_home(request):
 def history_detail(request, slug):
     page = get_object_or_404(HistoryPage, slug=slug)
 
-    engine = create_engine(
-        "postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db"
-    )
-
     # 1) Always start with the raw HTML content
     content_html = page.content or ""
     charts_data = []
 
     # 2) Build chart html blocks
     for chart in page.charts.all().order_by("order"):
-        df = pd.read_sql(chart.sql_query, engine)
+        df = cached_sql(chart.sql_query)
         fig = make_clean_plot(df, chart.chart_type, chart.title)
 
         html = fig.to_html(
@@ -91,6 +101,19 @@ def history_detail(request, slug):
 
 def make_clean_plot(df, chart_type, title):
 
+    # ---- SAFE NORMALIZATION ----
+    if "date" in df.columns:
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    else:
+        # Prevent plotly crash
+        raise ValueError(f"Chart requires a 'date' column: missing for {chart_type}")
+
+    if "value" in df.columns:
+        df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    else:
+        raise ValueError(f"Chart requires a 'value' column: missing for {chart_type}")
+
+
     """
     Generic chart builder using your ECB-style formatting
     for ALL charts (line, area, bar).
@@ -116,15 +139,164 @@ def make_clean_plot(df, chart_type, title):
 
     # ---- 1) Base figure by type ----
     
+
+    # ------------------------------------------------------------
+    # SPECIAL CASE: MONEY MARKET STRUCTURE MAP (MEAN × VOL × CORR)
+    # ------------------------------------------------------------
+    if chart_type == "mm_factor_map":
+        # -------------------------
+        # CLEAN DATA
+        # -------------------------
+        df = df.dropna(subset=["value"])
+        pivot = df.pivot(index="date", columns="indicator_code", values="value")
+        pivot = pivot.sort_index()
+
+
+        # -------------------------
+        # MEAN / VOLATILITY
+        # -------------------------
+        means = pivot.mean()
+        stds = pivot.std()
+
+        # -------------------------
+        # EXTRA STATS ADDED
+        # -------------------------
+        mins = pivot.min()
+        maxs = pivot.max()
+        first_dates = pivot.apply(lambda s: s.first_valid_index().strftime("%d %b %Y"))
+        last_dates  = pivot.apply(lambda s: s.last_valid_index().strftime("%d %b %Y"))
+        customdata = np.stack([
+            mins.values,
+            maxs.values,
+            first_dates.values.astype(str),
+            last_dates.values.astype(str)
+        ], axis=-1)
+
+
+        # -------------------------
+        # CORRELATION-BASED STRUCTURE
+        # -------------------------
+        corr = pivot.corr()
+
+        # avg corr (excluding self)
+        avg_corr = corr.apply(lambda row: row.drop(row.name).mean(), axis=1)
+        avg_abs_corr = corr.apply(lambda row: row.drop(row.name).abs().mean(), axis=1)
+
+        # -------------------------
+        # PLOT (Plotly)
+        # -------------------------
+        fig = go.Figure()
+
+        fig.add_trace(go.Scatter(
+            x=means,
+            y=stds,
+            mode="markers+text",
+            text=means.index,
+            textposition="middle center",
+
+            customdata=customdata,
+
+            marker=dict(
+                size=avg_abs_corr * 120,     # bubble size = absolute correlation
+                color=avg_corr,              # bubble color = signed correlation
+                colorscale="RdBu",
+                showscale=True,
+                colorbar=dict(
+                    title="Avg Corr",             # <<<<< CORRELATION TITLE
+                    thickness=12,
+                    tickfont=dict(color="white"),
+                    titlefont=dict(color="white"),
+                ),
+                line=dict(color="black", width=0.5)
+            ),
+        hovertemplate=(
+            "<b>%{text}</b><br>"
+            "Mean: %{x:.3f}<br>"
+            "Std: %{y:.3f}<br>"
+            "Avg Corr: %{marker.color:.2f}<br>"
+            "Min: %{customdata[0]:.3f}<br>"
+            "Max: %{customdata[1]:.3f}<br>"
+            "First: %{customdata[2]}<br>"
+            "Last: %{customdata[3]}<extra></extra>"
+        )
+        ))
+
+
+        # ---------------------------------------------------------
+        # ADD REGRESSION LINE (dashed)
+        # ---------------------------------------------------------
+        # Prepare regression inputs
+        X = means.values.reshape(-1, 1)   # mean → predictor
+        Y = stds.values                   # volatility → response
+
+        model = LinearRegression().fit(X, Y)
+
+        # Create smooth line for plotting
+        # Expand line beyond actual min/max (20% extra on each side)
+        x_min = X.min() - (X.max() - X.min()) * 0.2
+        x_max = X.max() + (X.max() - X.min()) * 0.2
+
+        x_line = np.linspace(x_min, x_max, 200)
+        y_line = model.predict(x_line.reshape(-1, 1))
+
+        # Add dashed regression line
+        fig.add_trace(go.Scatter(
+            x=x_line,
+            y=y_line,
+            mode="lines",
+            line=dict(color="white", width=1, dash="dash"),
+            opacity=0.8,
+            name="Regression Line",
+            hoverinfo="skip",
+            showlegend=False
+        ))
+
+        fig.update_layout(showlegend=False)
+
+        fig.update_layout(
+            template="plotly_dark",
+            paper_bgcolor="#0d0017",
+            plot_bgcolor="#0d0017",
+            height=450,
+            margin=dict(l=40, r=40, t=5, b=40),
+            font=dict(family="Courier Prime", color="white", size=12),
+
+            hoverlabel=dict(
+                bgcolor="white",               # <<< BLACK background
+                bordercolor="white",           # thin white frame (clean)
+                font=dict(
+                    family="Courier Prime",   # <<< COURIER PRIME
+                    size=12,
+                    color="black"             # <<< WHITE TEXT
+                ),
+            ),
+        )
+
+        fig.update_xaxes(
+            title="Mean Level (%)",
+            titlefont=dict(size=12),               # <<< SMALLER TITLE
+            tickfont=dict(size=12),                # optional: smaller ticks too
+            zeroline=False,
+            showgrid=True,
+            gridcolor="rgba(255,255,255,0.15)",
+        )
+
+        fig.update_yaxes(
+            title="Volatility (Std Dev)",
+            titlefont=dict(size=12),               # <<< SMALLER TITLE
+            tickfont=dict(size=12),
+            zeroline=False,
+            showgrid=True,
+            gridcolor="rgba(255,255,255,0.15)",
+        )
+
+        return fig
+
     # -----------------------------------------
     # SPECIAL CASE: MAD HYBRID DISPERSION CHART
     # -----------------------------------------
     if chart_type == "mad_hybrid":
-        import numpy as np
-        import plotly.graph_objects as go
 
-        df["date"] = pd.to_datetime(df["date"])
-        df["value"] = pd.to_numeric(df["value"], errors="coerce")
         df = df.dropna(subset=["value"])
 
         # ---- Pivot + ffill(limit=4)
@@ -152,10 +324,11 @@ def make_clean_plot(df, chart_type, title):
         # SHADING ZONES (clean colors + hovertext)
         # ------------------------------------------
 
-        # Convergence zone (<0.3)
+        # Convergence zone (<0.4)
         fig.add_hrect(
-            y0=0, y1=0.3,
-            fillcolor="rgba(0,102,204,0.13)",
+            y0=0, y1=0.4,
+            fillcolor="#0184FF",
+            opacity=0.3,
             line_width=0,
             layer="below",
         )
@@ -163,7 +336,8 @@ def make_clean_plot(df, chart_type, title):
         # Divergence zone (>1.0)
         fig.add_hrect(
             y0=1.0, y1=max(mad_series)*1.05,
-            fillcolor="rgba(255,80,80,0.15)",
+            fillcolor="#861313",
+            opacity=0.3,
             line_width=0,
             layer="below",
         )
@@ -270,9 +444,8 @@ def make_clean_plot(df, chart_type, title):
     # LINE - REGIME
     # -------------------------------
     if chart_type == "line_regime":
-        import plotly.graph_objects as go
 
-        df["date"] = pd.to_datetime(df["date"])
+
         df = df.sort_values("date")
 
         fig = go.Figure()
@@ -422,8 +595,6 @@ def make_clean_plot(df, chart_type, title):
 
 
         # ----------- Custom dashed gridlines (horizontal) -----------
-        import numpy as np
-
         y_min = df["value"].min()
         y_max = df["value"].max()
         y_ticks = np.arange(np.floor(y_min), np.ceil(y_max)+0.1, 1)
@@ -473,8 +644,6 @@ def make_clean_plot(df, chart_type, title):
     # -------------------------------
     if chart_type == "heatmap_mm":
         # df must contain: date, value, indicator_code
-        df["date"] = pd.to_datetime(df["date"])
-        df["value"] = pd.to_numeric(df["value"], errors="coerce")
         df = df.dropna(subset=["value"])
 
         pivot = df.pivot(index="date", columns="indicator_code", values="value")
@@ -498,9 +667,6 @@ def make_clean_plot(df, chart_type, title):
 
         # ---- Combined ----
         combined = pd.concat([yearly, quarterly, monthly], axis=0).T
-
-        # ---- Plotly Heatmap ----
-        import plotly.graph_objects as go
 
         # Custom colorscale (high rates = warm, low rates = cool)
         custom_scale = [
@@ -540,7 +706,6 @@ def make_clean_plot(df, chart_type, title):
                 yr = col[:4]
                 m  = col[-2:]
                 # convert month → name
-                import calendar
                 pretty_x.append(yr[-2:] + "-" + calendar.month_abbr[int(m)])
                 # -> "25-Nov"
 
@@ -562,7 +727,7 @@ def make_clean_plot(df, chart_type, title):
             template="plotly_dark",
             paper_bgcolor="#0d0017",
             plot_bgcolor="#0d0017",
-            margin=dict(l=50, r=50, t=30, b=80),   # 🔥 tighter top margin
+            margin=dict(l=50, r=50, t=10, b=10),   # 🔥 tighter top margin
             height=550,
             font=dict(family="Courier Prime", color="#FFFFFF"),
             title=dict(
@@ -577,11 +742,11 @@ def make_clean_plot(df, chart_type, title):
         fig.update_layout(
             hovermode="x",
             hoverlabel=dict(
-                bgcolor="#0d0017",
+                bgcolor="white",
                 font_size=13,
                 font_family="Courier Prime",
-                font_color="#FFFFFF",
-                bordercolor="#0d0017",
+                font_color="black",
+                bordercolor="white",
                 align="left",
             ),
         )
@@ -605,6 +770,9 @@ def make_clean_plot(df, chart_type, title):
         return fig
 
 
+    # -------------------------------
+    # GENERIC LINE
+    # -------------------------------
 
     if chart_type == "line":
         if color_col:
@@ -615,20 +783,27 @@ def make_clean_plot(df, chart_type, title):
                 color=color_col,
                 line_shape="hv",
             )
-        else:
-            fig = px.line(df, x="date", y="value", line_shape="hv")
-    elif chart_type == "area":
-        if color_col:
-            fig = px.area(df, x="date", y="value", color=color_col)
-        else:
-            fig = px.area(df, x="date", y="value")
-    else:  # "bar"
-        if color_col:
-            fig = px.bar(df, x="date", y="value", color=color_col)
-        else:
-            fig = px.bar(df, x="date", y="value")
 
     fig.update_layout(legend_title_text="")
+
+
+    # Code to dynamicaly change size of hover box (if too many data)
+    # Count number of unique series (for money-market charts)
+    if "indicator_code" in df.columns:
+        n_series = df["indicator_code"].nunique()
+    elif color_col:
+        n_series = df[color_col].nunique()
+    else:
+        n_series = 1
+
+    # Select hover font size based on number of series
+    if n_series <= 6:
+        hover_font_size = 13
+    elif n_series <= 8:
+        hover_font_size = 12
+    else:
+        hover_font_size = 10
+
 
     # ---- 2) Universal styling ----
     fig.update_layout(
@@ -664,6 +839,10 @@ def make_clean_plot(df, chart_type, title):
         height=420,
         hovermode="x unified",
         xaxis_hoverformat="%d %b %Y",
+        hoverlabel=dict(
+            font_size=hover_font_size,        # <── DYNAMIC
+        ),
+        
     )
 
      # Generic trace style
@@ -716,8 +895,6 @@ def download_chart_csv(request):
         page=page,
         title__iexact=chart_title.strip()
     )
-
-    engine = create_engine("postgresql+psycopg2://postgres:Sami1234@localhost:5432/financial_data_db")
     
     df = pd.read_sql(chart.sql_query, engine)
 

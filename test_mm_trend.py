@@ -32,13 +32,7 @@ df = df.dropna(subset=["value"])
 pivot = df.pivot(index="date", columns="indicator_code", values="value")
 pivot = pivot.sort_index()
 
-# ------------------------------------------------------------
-# 2) MERGE EONIA + ESTER (simply sum them)
-# ------------------------------------------------------------
-if "EONIA" in pivot.columns and "ESTER" in pivot.columns:
-    pivot["EURO_ON"] = pivot["EONIA"].fillna(0) + pivot["ESTER"].fillna(0)
-    pivot["EURO_ON"].replace(0, np.nan, inplace=True)
-    pivot.drop(columns=["EONIA", "ESTER"], inplace=True)
+
 
 # ------------------------------------------------------------
 # 3) BUILD BALANCED PANEL FOR PCA (best practice)
@@ -96,6 +90,9 @@ corr = pivot.corr()
 # Correct average correlation (exclude self)
 avg_corr = corr.apply(lambda row: row.drop(row.name).mean(), axis=1)
 avg_abs_corr = corr.apply(lambda row: row.drop(row.name).abs().mean(), axis=1)
+
+
+print(corr)
 
 # ------------------------------------------------------------
 # EXPORT BUBBLE CHART DATA

@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         children: [
           "Fed",
           "ECB",
-          "Global Overview"
+          "Key Global Policy Rates"
         ]
       },
 

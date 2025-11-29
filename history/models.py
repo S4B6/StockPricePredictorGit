@@ -31,11 +31,10 @@ class HistoryChart(models.Model):
         max_length=30,
         choices=[
             ("line", "Line Chart"),
-            ("area", "Area Chart"),
-            ("bar", "Bar Chart"),
-            ("heatmap_mm", "Money Market Heatmap"),
             ("line_regime", "Line with Regime Shading"),
+            ("heatmap_mm", "Money Market Heatmap"),
             ("mad_hybrid", "Money Market MAD"),
+            ("mm_factor_map", "Money Market Factor Map"),
         ],
         default="line"
     )
