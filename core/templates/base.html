@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Stock Price Predictor{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
 </head>
 
 <!-- load history chart to speed up-->
@@ -20,11 +22,11 @@
             <span class="menu-item history {% if request.resolver_match.url_name == 'history' %}active{% endif %}">
                 <a href="{% url 'history' %}" data-transition>History</a>
             </span>
-            <span class="menu-item markets {% if request.resolver_match.url_name == 'markets' %}active{% endif %}">
-                <a href="{% url 'markets' %}" data-transition>Markets</a>
+            <span class="menu-item momentum {% if request.resolver_match.url_name == 'momentum' %}active{% endif %}">
+                <a href="{% url 'momentum' %}" data-transition>Momentum</a>
             </span>
-            <span class="menu-item predictor {% if request.resolver_match.url_name == 'predictor' %}active{% endif %}">
-                <a href="{% url 'predictor' %}" data-transition>Predictor</a>
+            <span class="menu-item forecasts {% if request.resolver_match.url_name == 'forecasts' %}active{% endif %}">
+                <a href="{% url 'forecasts' %}" data-transition>Forecasts</a>
             </span>
         </nav>
     </header>
@@ -36,13 +38,19 @@
 
 <footer class="site-footer">
   <div class="footer-links">
-    <a href="{% url 'who_we_are' %}" class="footer-link">Who We Are</a>
+    <a href="{% url 'who_we_are' %}" class="footer-link">Markets Since 1998</a>
     <span class="divider">|</span>
     <a href="{% url 'disclaimer' %}" class="footer-link">Disclaimer</a>
+    <span class="divider">|</span>
+    <a href="{% url 'disclaimer' %}" class="footer-link">Privacy</a>
+    <span class="divider">|</span>
+    <a href="{% url 'disclaimer' %}" class="footer-link">Terms</a>
+    <span class="divider">|</span>
+    <a href="{% url 'disclaimer' %}" class="footer-link">Contact</a>
   </div>
 
   <div class="footer-bottom">
-    <p>{{ current_year }}</p>
+    <p>© {{ current_year }}</p>
   </div>
 </footer>
 

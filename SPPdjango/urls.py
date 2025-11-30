@@ -20,6 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),  # Include URLs from the core app
-    path('markets/', include('markets.urls')), # Include markets URLs for financial data
+    path('momentum/', include('momentum.urls')), # Include momentum URLs for financial data
     path("history/", include("history.urls")),
 ]

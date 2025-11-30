@@ -1,0 +1,405 @@
+/******************************************************/
+/* Body */
+/******************************************************/
+
+h1 {
+    font-size: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    font-weight: normal;
+    margin-bottom: 60px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px currentColor;
+  }
+
+  .as-h1, h1 {
+    color: #00ff00;
+}
+
+
+h2 {
+    font-size: 1.6em;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 1.4em;
+    font-weight: normal;
+}
+
+.filler{
+    border: 1px solid blue;
+    height: 4000px;
+}
+
+/******************************************************/
+/* Sticky Nav */
+/******************************************************/
+
+#sticky-nav {
+    position: fixed;
+    top: 65px; /* Adjust based on your main navigation height */
+    left: 0; /* Position it at the far left */
+    width: 100%; /* Make it span the full width of the viewport */
+    background: black;
+    color: rgb(0, 255, 0);
+    font-size: 1.5em;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+    border-top: 1px solid rgb(66,66,66);
+    display: flex; /* Enable flexbox for horizontal layout */
+    justify-content: space-between; /* Space between hierarchy text and arrow */
+    align-items: center; /* Center vertically */
+    box-sizing: border-box;
+    padding: 8px 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Bottom shadow */
+    /*No selection*/
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.menu-arrow {
+    cursor: pointer;
+    font-size: 1.7em;
+    color: rgba(0, 255, 0);
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.menu-arrow.active {
+    transform: rotate(180deg); /* Rotate 180 degrees when active */
+}
+
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position it below the sticky-nav */
+    background-color: black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    font-size: 1em;
+    color: #00ff00;
+    z-index: 1001;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
+    padding: 8px 20px;
+}
+
+.dropdown-menu a {
+    display: block; /* Each link takes up the full width, creating a line break */
+    padding: 5px; /* Adds padding around each link for better spacing */
+    text-decoration: none;
+    color: rgba(0, 255, 0,0.4);
+}
+
+.dropdown-menu a:hover {
+    color:rgba(0, 255, 0);
+}
+
+.dropdown-menu a.active-hierarchy {
+    color: rgba(0, 255, 0); /* Highlight color for the current hierarchy */
+}
+
+
+/******************************************************/
+/* Equity */
+/******************************************************/
+
+/************* All Countries **************/
+
+#a
+
+#content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.subtitle {
+    color: grey;
+}
+
+/* Map */
+
+#map-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 66%;
+
+}
+
+#map-container {
+    height: 500px;
+}
+
+#tooltip {
+    position: absolute;
+    visibility: hidden;
+    background-color: black;
+    padding: 5px;
+    border: 1px solid rgb(66,66,66);
+    border-radius: 0px;
+    font-size: 12px;
+    pointer-events: none;
+    color: white;
+}
+
+#legend-container {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    top:0;
+}
+
+
+/* Right side performance table */
+#all-countries-performance-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0px;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align the content */
+}
+
+.centered-title {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px; /* Space below the title */
+}
+
+#performance-chart1, #performance-chart2 {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 200px;
+    color: white;
+}
+
+.bar-container {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.bar-label {
+    font-size: 12px;
+}
+
+.bar {
+    height: 20px;
+    border-radius: 0; /* Removed rounding */
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 0 5px;
+}
+
+.positive-bar {
+    background-color: rgba(0, 255, 0, 0.8);
+    color: black;
+}
+
+.negative-bar {
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+}
+
+/* Right-align labels for chart 1 */
+#performance-chart1 .bar-container {
+    justify-content: flex-end;
+}
+
+#performance-chart1 .bar-label {
+    margin-left: 5px;
+    text-align: right;
+}
+
+/* Left-align labels for chart 2 */
+#performance-chart2 .bar-container {
+    justify-content: flex-start;
+}
+
+#performance-chart2 .bar-label {
+    margin-right: 5px;
+    text-align: left;
+}
+
+.bar-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Stack label above the bar */
+    gap: 2px;
+}
+
+.bar-label {
+    font-size: 12px;
+    text-align: center; /* Center align the label above the bar */
+}
+
+/* For Chart 1 */
+#performance-chart1 .bar-container {
+    align-items: flex-end; /* Align to the right for the first chart */
+}
+
+/* For Chart 2 */
+#performance-chart2 .bar-container {
+    align-items: flex-start; /* Align to the left for the second chart */
+}
+
+.chart-title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+/*
+#bar-tooltip {
+    position: absolute; 
+    visibility: hidden; 
+    background: black; 
+    color: white; 
+    padding: 3px; 
+    border: 1px solid #101291; 
+    border-radius: 3px; 
+    font-size: 12px; 
+    z-index: 1000;
+}
+    */
+
+.percentage-label {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+
+
+
+
+
+
+
+
+/* Dropdown Trigger Styling */
+#performance-period {
+    cursor: pointer;
+    color: white;
+    background-color: #222; /* Grey background to indicate clickability */
+    padding: 4px 13px;
+
+    position: relative; /* Required to anchor the dropdown to the trigger */
+
+}
+
+#performance-period:hover {
+    background-color: #333;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #222;
+    min-width: 57px;
+    z-index: 1;
+    text-align: center;
+    left: 0;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    z-index: 1000;
+}
+
+/* Active trigger (lighter grey when dropdown is visible) */
+#performance-period.active {
+    background-color: #333; /* Lighter grey when active */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 8px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    text-align: left;
+    border-top: 1px solid rgb(66,66,66);
+}
+
+
+.dropdown-content a:hover {
+    background-color: #333;
+}
+
+/* Show dropdown on trigger click */
+.show-dropdown {
+    display: block;
+}
+
+
+/*Dots in the map that say if market is closed or open*/
+
+/* Tooltip for market dots – clean, white, flat style */
+#momentum-tooltip {
+    position: absolute;
+    background: rgb(255, 255, 255);           /* white background */
+    color: #000000;                   /* dark text */
+    padding: 4px 4px;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 1.2;
+    pointer-events: none;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 1;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#momentum-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Style for the colored dot inside the tooltip */
+.momentum-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+#market-status-legend {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.page-introduction::after {
+  content: "|";
+  margin-left: 4px;
+  color: #ff7300;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
+
+.main-section {
+    scroll-margin-top: 120px; /* adjust to match sticky ribbon height */
+}

@@ -1,3 +1,5 @@
+# history/models.py
+
 from django.db import models
 
 class HistoryPage(models.Model):
@@ -14,6 +16,10 @@ class HistoryPage(models.Model):
     def __str__(self):
         return self.title
 
+
+# -----------------------------------------------------
+# UPDATED HistoryChart WITH NEW MODULAR chart_type
+# -----------------------------------------------------
 class HistoryChart(models.Model):
     page = models.ForeignKey(
         HistoryPage,
@@ -27,15 +33,28 @@ class HistoryChart(models.Model):
         help_text="SQL query returning at least: date, value columns"
     )
 
+    # -------------------------------------------------
+    # NEW CHART TYPE CHOICES — CLEAN + MODULAR
+    # -------------------------------------------------
+    CHART_TYPES = [
+
+        # -------------------------------
+        # Generic charts
+        # -------------------------------
+        ("generic.line_generic", "Generic Line Chart"),
+        ("generic.line_regime", "Line Chart with Regime Shading"),
+
+        # -------------------------------
+        # Rates → Policy Rates → Money Markets
+        # -------------------------------
+        ("rates.policy_rates.mm_bubble_map", "MM Bubble Map"),
+        ("rates.policy_rates.mm_heatmap", "MM Heatmap"),
+        ("rates.policy_rates.mm_line_mad_hybrid", "MM MAD Hybrid Line"),
+        ("rates.policy_rates.mm_line_regime", "MM Regime Line"),
+    ]
     chart_type = models.CharField(
-        max_length=30,
-        choices=[
-            ("line", "Line Chart"),
-            ("line_regime", "Line with Regime Shading"),
-            ("heatmap_mm", "Money Market Heatmap"),
-            ("mad_hybrid", "Money Market MAD"),
-            ("mm_factor_map", "Money Market Factor Map"),
-        ],
+        max_length=40,
+        choices=CHART_TYPES,
         default="line"
     )
 

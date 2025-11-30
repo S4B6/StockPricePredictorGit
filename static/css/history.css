@@ -14,7 +14,7 @@
   display: inline-block;
   width: 6px;
   height: 1em;
-  background-color: #ff8000;
+  background-color: #ff00f1;
   margin-left: 4px;
   animation: blink 0.8s infinite;
   vertical-align: -2px;
@@ -59,25 +59,29 @@ h1 {
   border-radius: 0;
   text-decoration: none;
   font-family: 'Share Tech Mono', monospace;
-  letter-spacing: 6px;
   font-size: 1.3rem;
   letter-spacing: 1px;
   color: #000000;
   font-weight: 600;
   border: none;
+  /*Selector: none*/
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* --- Flashy base colors --- */
-.macro { background-color: #ff00f1; }        /* neon magenta */
-.equity { background-color: #00ff00;} /* neon green */
+.macro { background-color: #ff009d; }        /* neon magenta */
+.equity { background-color: #00ff80;} /* neon green */
 .rates { background-color: #ff8000; }    /* vivid orange */
 .commodities { background-color: #fff800;} /* pure yellow */
 .currencies { background-color: #ff0000; }   /* red */
 .real-assets { background-color: #00fff7;}   /* bright blue */
 
 /* --- Dark hover (pressed effect, almost black) --- */
-.macro:hover { background-color: #1a0018; color: #ff00f1; }
-.equity:hover { background-color: #001a00; color: #00ff00; }
+.macro:hover { background-color: #1a0018; color: #ff009d; }
+.equity:hover { background-color: #001a00; color: #00ff80; }
 .rates:hover { background-color: #1a0d00; color: #ff8000; }
 .commodities:hover { background-color: #1a1800; color: #fff800; }
 .currencies:hover { background-color: #1a0000; color: #ff0000; }
@@ -93,7 +97,6 @@ h1 {
 .category-card:hover {
   /*text-shadow: 0 0 8px currentColor;*/
   filter: brightness(1);
-  color: white;
 }
 
 /* Dim non-active cards (keeps layout unchanged) */
@@ -124,7 +127,7 @@ h1 {
 .back-icon::before {
   content: "⟵"; position: absolute; inset: 0;
   display: grid; place-items: center;
-  font-family: 'Courier Prime', monospace; font-size: 1.2rem; color: #ffffff;
+  font-family: 'Courier Prime', monospace; font-size: 1.2rem; color: #ffffff; text-shadow: 0 0 8px currentColor;
 }
 .back-icon:hover { background: #242424;}
 .back-icon:hover::before { color: #ffffff; }
@@ -185,11 +188,16 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Courier Prime', monospace;
+  font-family: 'Share Tech Mono', monospace;
   font-size: 1.05rem;
   cursor: pointer;
   border-radius: 0;
   text-align: center;
+  /*Selector: none*/
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* Make leaves even smaller */
@@ -209,28 +217,28 @@ h1 {
 }
 
 /* Theme colors for folders */
-.sub-theme-macro .sub-box.nav       { background-color: #ff00f1; color: #000;}
-.sub-theme-equity .sub-box.nav      { background-color: #00ff00; color: #000;}
+.sub-theme-macro .sub-box.nav       { background-color: #ff009d; color: #000;}
+.sub-theme-equity .sub-box.nav      { background-color: #00ff80; color: #000;}
 .sub-theme-rates .sub-box.nav       { background-color: #ff8000;color: #000;}
 .sub-theme-currencies .sub-box.nav  { background-color: #ff0000;color: #000;}
 .sub-theme-commodities .sub-box.nav { background-color: #fff800;color: #000;}
 .sub-theme-real-assets .sub-box.nav { background-color: #00fff7;color: #000;}
 
 /* Slightly darker on hover */
-.sub-theme-macro .sub-box.nav:hover { background-color: #1a0018; color: #ff00f1; }
-.sub-theme-equity .sub-box.nav:hover { background-color: #1a0018; color: #00ff00; }
+.sub-theme-macro .sub-box.nav:hover { background-color: #1a0018; color: #ff009d; }
+.sub-theme-equity .sub-box.nav:hover { background-color: #1a0018; color: #00ff80; }
 .sub-theme-rates .sub-box.nav:hover { background-color: #1a0018; color: #ff8000; }
 .sub-theme-currencies .sub-box.nav:hover { background-color: #1a0018; color: #ff0000; }
 .sub-theme-commodities .sub-box.nav:hover { background-color: #1a0018; color: #fff800; }
 .sub-theme-real-assets .sub-box.nav:hover { background-color: #1a0018; color: #00fff7; }
 
 /* Theme-colored leaf text (non-box links) */
-.sub-theme-macro .sub-box.leaf       { color: #ff00f1;  text-shadow: 0 0 8px currentColor;}  /* magenta */
-.sub-theme-equity .sub-box.leaf      { color: #00ff00; text-shadow: 0 0 8px currentColor;}  /* neon green */
-.sub-theme-rates .sub-box.leaf       { color: #ff8000; text-shadow: 0 0 8px currentColor;}  /* orange */
-.sub-theme-currencies .sub-box.leaf  { color: #ff0000; text-shadow: 0 0 8px currentColor;}  /* red */
-.sub-theme-commodities .sub-box.leaf { color: #fff800; text-shadow: 0 0 8px currentColor;}  /* yellow */
-.sub-theme-real-assets .sub-box.leaf { color: #00fff7; text-shadow: 0 0 8px currentColor;}  /* cyan */
+.sub-theme-macro .sub-box.leaf       { color: #ff009d;  text-shadow: 0 0 8px currentColor; justify-content: flex-start; padding-left: 30px;}  /* magenta */
+.sub-theme-equity .sub-box.leaf      { color: #00ff80; text-shadow: 0 0 8px currentColor; justify-content: flex-start; padding-left: 30px;}  /* neon green */
+.sub-theme-rates .sub-box.leaf       { color: #ff8000; text-shadow: 0 0 8px currentColor; justify-content: flex-start; padding-left: 30px;}  /* orange */
+.sub-theme-currencies .sub-box.leaf  { color: #ff0000; text-shadow: 0 0 8px currentColor; justify-content: flex-start; padding-left: 30px;}  /* red */
+.sub-theme-commodities .sub-box.leaf { color: #fff800; text-shadow: 0 0 8px currentColor; justify-content: flex-start; padding-left: 30px;}  /* yellow */
+.sub-theme-real-assets .sub-box.leaf { color: #00fff7; text-shadow: 0 0 8px currentColor; justify-content: flex-start; padding-left: 30px;}  /* cyan */
 
 
 /* Keep the active box fully visible, no hover reaction */

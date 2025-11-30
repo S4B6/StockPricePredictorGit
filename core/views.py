@@ -6,8 +6,8 @@ from datetime import datetime
 def about(request):
     return render(request, 'about.html')
 
-def predictor(request):
-    return render(request, 'predictor.html')
+def forecasts(request):
+    return render(request, 'forecasts.html')
 
 from datetime import datetime
 

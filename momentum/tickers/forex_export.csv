@@ -1,0 +1,8 @@
+asset_class,ticker,name,domestic_country_or_region,foreign_country_or_region,source,base,foreign
+Currency,EURUSD=X,EUR/USD,Eurozone,US,yfinance,EUR,USD
+Currency,JPY=X,USD/JPY,US,Japan,yfinance,USD,JPY
+Currency,GBPUSD=X,GBP/USD,UK,US,yfinance,GBP,USD
+Currency,CHF=X,USD/CHF,US,Switzerland,yfinance,USD,CHF
+Currency,AUDUSD=X,AUD/USD,Australia,US,yfinance,AUD,USD
+Currency,CAD=X,USD/CAD,US,Canada,yfinance,USD,CAD
+Currency,CNY=X,USD/CNY,US,China,yfinance,USD,CNY

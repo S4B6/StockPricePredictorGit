@@ -6,6 +6,7 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/history_detail.css' %}">
+<script src="https://cdn.plot.ly/plotly-basic-latest.min.js"></script>
 
 <div class="history-detail {{ theme }}">
 
@@ -34,5 +35,7 @@
 <script src="{% static 'js/history_tooltips.js' %}"></script>
 <script src="{% static 'js/history_download.js' %}"></script>
 <script src="{% static 'js/history_sticky_offset.js' %}"></script>
+<script src="{% static 'js/history_async_charts.js' %}"></script>
+
 
 {% endblock %}
