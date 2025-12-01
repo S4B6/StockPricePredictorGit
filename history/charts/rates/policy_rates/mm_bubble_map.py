@@ -124,7 +124,7 @@ def render(df, title):
         paper_bgcolor="#0d0017",
         plot_bgcolor="#0d0017",
         height=450,
-        margin=dict(l=40, r=40, t=10, b=10),
+        margin=dict(l=40, r=40, t=10, b=40),
         font=dict(family="Courier Prime", color="white", size=12),
 
         hoverlabel=dict(

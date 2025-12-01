@@ -34,6 +34,14 @@ body, main, footer, header, div{
     color: #000000;
 }
 
+br {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+
 .menu a,
 .menu span,
 .divider {
@@ -240,3 +248,6 @@ body.history-detail {
         opacity 0.15s ease-out,
         filter 0.15s ease-out;
 }
+
+
+

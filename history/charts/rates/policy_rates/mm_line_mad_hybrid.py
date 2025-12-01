@@ -120,7 +120,7 @@ def render(df, title):
         paper_bgcolor="black",
         plot_bgcolor="black",
         height=250,
-        margin=dict(l=40, r=40, t=10, b=10),
+        margin=dict(l=40, r=40, t=40, b=40),
 
         font=dict(
             family="Courier Prime",

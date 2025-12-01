@@ -42,7 +42,7 @@ class HistoryChart(models.Model):
         # Generic charts
         # -------------------------------
         ("generic.line_generic", "Generic Line Chart"),
-        ("generic.line_regime", "Line Chart with Regime Shading"),
+        ("generic.line_regime", "Generic Line Chart with Regime Shading"),
 
         # -------------------------------
         # Rates → Policy Rates → Money Markets
@@ -50,7 +50,7 @@ class HistoryChart(models.Model):
         ("rates.policy_rates.mm_bubble_map", "MM Bubble Map"),
         ("rates.policy_rates.mm_heatmap", "MM Heatmap"),
         ("rates.policy_rates.mm_line_mad_hybrid", "MM MAD Hybrid Line"),
-        ("rates.policy_rates.mm_line_regime", "MM Regime Line"),
+        ("rates.policy_rates.mm_line_ma_regime", "MM MA5 Regime Line"),
     ]
     chart_type = models.CharField(
         max_length=40,

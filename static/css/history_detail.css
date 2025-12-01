@@ -344,3 +344,16 @@ font-family: 'Share Tech Mono', monospace;
 .history-body h2 {
     scroll-margin-top: 100px;  /* adjust if needed */
 }
+
+
+
+
+.chart-methodology {
+  margin-top: -8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-family: 'Share Tech Mono', monospace;
+  color: #aaaaaa;
+  opacity: 0.75;
+  text-align: center;
+}

@@ -104,7 +104,7 @@ def render(df, title):
             font=dict(size=12, color="#ffffff"),
         ),
 
-        margin=dict(l=40, r=40, t=40, b=40),
+        margin=dict(l=40, r=40, t=10, b=40),
 
         height=420,
         hovermode="x unified",

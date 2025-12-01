@@ -17,6 +17,12 @@ Uploads local commits to the GitHub repo.
 •   Pull latest changes: git pull origin main
 Downloads and merges the latest changes from GitHub.
 
+•   Command to save FASTER - run it once
+git config --global alias.save '!git add . && git commit -m "update" && git push'
+
+•   NEXT TIME you want to save, you just press  
+git save
+
 **************************************************************
 Django Commands
 
@@ -66,3 +72,7 @@ python manage.py makemigrations
 **************************************************************
 
 
+PROCEDURE WHEN YOU WANNA SAVE all
+
+1/ pip freeze > requirements.txt
+2/ git save
